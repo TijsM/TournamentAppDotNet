@@ -26,6 +26,8 @@ namespace TournamentApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddOpenApiDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +44,8 @@ namespace TournamentApi
             }
 
             app.UseHttpsRedirection();
+            app.UseSwaggerUi3();
+            app.UseSwagger();
             app.UseMvc();
         }
     }
