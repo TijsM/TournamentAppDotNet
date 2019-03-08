@@ -17,8 +17,9 @@ namespace TournamentApi.Data.Mappers
 
             builder.HasMany(t => t.Participants)
                 .WithOne(u => u.Tournament)
-                .IsRequired(true).
-                OnDelete(DeleteBehavior.Restrict);
+                .IsRequired(true)
+                .HasForeignKey(u => u.TournamentId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -49,5 +49,11 @@ namespace TournamentApi.Data.Repositories
         {
             _context.SaveChanges();
         }
+
+        public void update(User user)
+        {
+            _users.Update(user);
+        }
+
     }
 }

@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using TournamentApi.Data;
+using TournamentApi.Data.Repositories;
+using TournamentApi.Models;
 
 namespace TournamentApi
 {
@@ -36,6 +38,7 @@ namespace TournamentApi
             services.AddOpenApiDocument();
 
             services.AddScoped<TournamentAppDataInitializer>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<TournamentContext>();
 

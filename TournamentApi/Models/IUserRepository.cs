@@ -11,6 +11,7 @@ namespace TournamentApi.Models
         User GetById(int id);
         void Add(User user);
         void Delete(User user);
+        void update(User user);
         void SaveChanges();
       
     }
