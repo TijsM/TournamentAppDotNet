@@ -18,13 +18,22 @@ namespace TournamentApi.Controllers
         {
             _userRepository = repo;
         }
-
+        /// <summary>
+        /// Get all users
+        /// </summary>
+        /// <returns>list of users</returns>
         [HttpGet]
         public IEnumerable<User> GetUsers()
         {
             return _userRepository.GetAll();
         }
 
+
+        /// <summary>
+        /// Get the user with the given id
+        /// </summary>
+        /// <param name="id">the id of the user</param>
+        /// <returns>The User</returns>
         [HttpGet("{id}")]
         public ActionResult<User> getUser(int id)
         {
@@ -35,6 +44,10 @@ namespace TournamentApi.Controllers
             return user;
         }
 
+        /// <summary>
+        /// Creates a new user
+        /// </summary>
+        /// <param name="user">the user that has to be created</param>
         [HttpPost]
         public ActionResult<User> AddUser(User user)
         {
@@ -44,6 +57,13 @@ namespace TournamentApi.Controllers
             return CreatedAtAction(nameof(getUser), new { id = user.UserId }, user);
         }
 
+
+        /// <summary>
+        /// Modifies the User
+        /// </summary>
+        /// <param name="id">id of the user that has to be modified</param>
+        /// <param name="user">the modified object</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public IActionResult EditUser(int id, User user)
         {
@@ -55,6 +75,12 @@ namespace TournamentApi.Controllers
             return NoContent();
         }
 
+
+        /// <summary>
+        /// removes a user 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public ActionResult<User> DeleteUser(int id)
         {

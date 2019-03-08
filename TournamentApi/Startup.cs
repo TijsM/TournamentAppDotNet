@@ -35,7 +35,13 @@ namespace TournamentApi
             services.AddDbContext<TournamentContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("TournamentContext")));
 
-            services.AddOpenApiDocument();
+            services.AddOpenApiDocument(c =>
+            {
+                c.DocumentName = "apidocs";
+                c.Title = "Recipe API";
+                c.Version = "v1";
+                c.Description = "The Recipe API documentation description.";
+            });
 
             services.AddScoped<TournamentAppDataInitializer>();
             services.AddScoped<IUserRepository, UserRepository>();
