@@ -15,21 +15,21 @@ namespace TournamentApi.Models
         public DateTime EndDate { get; set; }
         public DateTime StartDate { get; set; }
         public Gender Gender { get; set; }
-        public ICollection<User> Users { get; set; }
+        public ICollection<User> Participants { get; set; }
 
         #endregion
 
         #region Constuctors
         public Tournament()
         {
-            Users = new List<User>();
+            Participants = new List<User>();
         }
         #endregion
 
         #region Methods
         public void AddUser(User user)
         {
-            Users.Add(new User() { UserId = user.UserId, FirstName = user.FirstName, FamilyName = user.FamilyName, TennisVlaanderenRanking = user.TennisVlaanderenRanking, DateOfBirth = user.DateOfBirth, Password = user.Password, PhoneNumber = user.PhoneNumber, Email = user.Email, Gender = user.Gender });
+            Participants.Add(new User() { UserId = user.UserId, FirstName = user.FirstName, FamilyName = user.FamilyName, TennisVlaanderenRanking = user.TennisVlaanderenRanking, DateOfBirth = user.DateOfBirth, PhoneNumber = user.PhoneNumber, Email = user.Email, Gender = user.Gender });
         }
         #endregion
     }
