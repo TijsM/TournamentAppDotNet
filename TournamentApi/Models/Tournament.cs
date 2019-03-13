@@ -29,7 +29,23 @@ namespace TournamentApi.Models
         #region Methods
         public void AddUser(User user)
         {
-            Participants.Add(new User() { UserId = user.UserId, FirstName = user.FirstName, FamilyName = user.FamilyName, TennisVlaanderenRanking = user.TennisVlaanderenRanking, DateOfBirth = user.DateOfBirth, PhoneNumber = user.PhoneNumber, Email = user.Email, Gender = user.Gender });
+            Participants.Add(user);
+
+            
+        }
+
+        private void OrderParticpantsbyRankTennisVlaanderen()
+        {
+            Participants = Participants
+                .OrderBy(t => t.TennisVlaanderenRanking)
+                .ToList();
+        }
+
+        private void OrderParticipantsByRankInTournament()
+        {
+            Participants = Participants
+                .OrderBy(t => t.RankInTournament)
+                .ToList();
         }
         #endregion
     }

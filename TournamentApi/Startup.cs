@@ -44,6 +44,7 @@ namespace TournamentApi
             });
 
             services.AddScoped<TournamentAppDataInitializer>();
+            services.AddScoped<ITournamentRepository, TournamentRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<TournamentContext>();

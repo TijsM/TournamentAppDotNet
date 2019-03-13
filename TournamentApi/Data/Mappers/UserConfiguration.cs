@@ -14,6 +14,11 @@ namespace TournamentApi.Data.Mappers
             builder.ToTable("Users");
             builder.HasKey(u => u.UserId);
 
+            builder.HasOne(u => u.Tournament)
+                .WithMany(t => t.Participants)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
            
         }
     }

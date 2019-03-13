@@ -15,11 +15,13 @@ namespace TournamentApi.Data.Mappers
             builder.ToTable("Tournaments");
             builder.HasKey(t => t.TournamentId);
 
+
+
             builder.HasMany(t => t.Participants)
                 .WithOne(u => u.Tournament)
                 .IsRequired(true)
                 .HasForeignKey(u => u.TournamentId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }
