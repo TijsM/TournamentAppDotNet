@@ -16,6 +16,7 @@ namespace TournamentApi.Models
         public DateTime StartDate { get; set; }
         public Gender Gender { get; set; }
         public ICollection<User> Participants { get; set; }
+        public IEnumerable<Match> Matches { get; set; }
 
         #endregion
 

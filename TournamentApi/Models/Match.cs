@@ -12,7 +12,7 @@ namespace TournamentApi.Models
         #endregion
 
         #region Properties
-
+        public int MatchId { get; set; }
         public User Player1 { get; set; }
         public User Player2 { get; set; }
         public int GamesWonPlayer1set1 { get; set; }
@@ -22,13 +22,19 @@ namespace TournamentApi.Models
         public int GamesWonPlayer2Set2 { get; set; }
         public int GamesWonPlayer2Set3 { get; set; }
         public User Winner { get; set; }
-        public User Loser { get; set; } 
+        public User Loser { get; set; }
+        public Tournament Tournament { get; set; }
         #endregion
 
         public Match(User player1, User player2)
         {
             Player1 = player1;
             Player2 = player2;
+        }
+
+        public Match()
+        {
+
         }
 
 

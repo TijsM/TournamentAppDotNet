@@ -9,8 +9,6 @@ namespace TournamentApi.Data.Repositories
 {
     public class TournamentRepository : ITournamentRepository
     {
-
-
         private readonly TournamentContext _context;
         private readonly DbSet<Tournament> _tournaments;
 
