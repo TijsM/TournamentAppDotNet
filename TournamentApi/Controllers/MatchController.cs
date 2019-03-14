@@ -20,18 +20,34 @@ namespace TournamentApi.Controllers
             _matchRepository = matchRepository;
         }
 
+        /// <summary>
+        /// Gives all matches 
+        /// </summary>
+        /// <returns>All matches</returns>
         [HttpGet]
         public IEnumerable<Match> GetMatches()
         {
             return _matchRepository.GetAll();
         }
 
+
+        /// <summary>
+        /// Gives all matches from a player
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [HttpGet("{userId}")]
         public IEnumerable<Match> getMatchesFromPlayer(int userId)
         {
             return _matchRepository.GetAllFromPlayer(userId);
         }
 
+
+        /// <summary>
+        /// Gives all matches of a player
+        /// </summary>
+        /// <param name="id">id of the player</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public ActionResult<Match> GetMatch(int id)
         {
@@ -43,6 +59,11 @@ namespace TournamentApi.Controllers
             return match;
         }
 
+        /// <summary>
+        /// creates a match
+        /// </summary>
+        /// <param name="match"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult<Match> AddMatch(Match match)
         {
@@ -52,6 +73,13 @@ namespace TournamentApi.Controllers
             return CreatedAtAction(nameof(GetMatch), new { id = match.MatchId }, match);
         }
 
+
+        /// <summary>
+        /// updates a match
+        /// </summary>
+        /// <param name="id">id of the match</param>
+        /// <param name="match"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public IActionResult EditMatch(int id, Match match)
         {
@@ -64,6 +92,11 @@ namespace TournamentApi.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Removes a match
+        /// </summary>
+        /// <param name="id">id of the match</param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public ActionResult<Match> DeleteMatch(int id)
         {

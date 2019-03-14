@@ -44,6 +44,7 @@ namespace TournamentApi
             });
 
             services.AddScoped<TournamentAppDataInitializer>();
+            services.AddScoped<IMatchRepository, MatchRepository>();
             services.AddScoped<ITournamentRepository, TournamentRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 

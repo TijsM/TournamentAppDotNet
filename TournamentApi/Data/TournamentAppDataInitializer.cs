@@ -12,6 +12,7 @@ namespace TournamentApi.Data
         #region Fields
         private readonly TournamentContext _dbContext;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IList<Match> _matches;
         #endregion
 
 
@@ -52,7 +53,35 @@ namespace TournamentApi.Data
                 tournamentWomen.Participants.Add(MariaCharapova);
                 tournamentWomen.Participants.Add(JustineHenin);
 
-                
+                Match match1 = new Match(RafaelNadal, RogerFederer);
+                Match match2 = new Match(RafaelNadal, NovakDjokovich);
+                Match match3 = new Match(RogerFederer, RafaelNadal);
+                Match match4 = new Match(RogerFederer, NovakDjokovich);
+                Match match5 = new Match(NovakDjokovich, RafaelNadal);
+                Match match6 = new Match(NovakDjokovich, RogerFederer);
+
+                Match match7 = new Match(KimKlijsters, MariaCharapova);
+                Match match8 = new Match(KimKlijsters, JustineHenin);
+                Match match9 = new Match(MariaCharapova, KimKlijsters);
+                Match match10 = new Match(MariaCharapova, JustineHenin);
+                Match match11 = new Match(JustineHenin, KimKlijsters);
+                Match match12 = new Match(JustineHenin, MariaCharapova);
+
+                _dbContext.Matches.AddRange(match1
+                    , match2
+                    , match3
+                    , match4
+                    , match5
+                    , match6
+                    , match7
+                    , match8
+                    , match9
+                    , match10
+                    , match11
+                    , match12
+                    );
+                    
+
 
                 foreach(User u in tournamentMen.Participants)
                 {
@@ -66,6 +95,8 @@ namespace TournamentApi.Data
                 }
 
                 _dbContext.SaveChanges();
+
+
             }  
         }
 

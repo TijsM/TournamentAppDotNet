@@ -22,6 +22,13 @@ namespace TournamentApi.Data.Mappers
                 .IsRequired(true)
                 .HasForeignKey(u => u.TournamentId)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            builder.HasMany(t => t.Matches)
+                .WithOne(m => m.Tournament)
+                .IsRequired(true)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            
         }
     }
 }

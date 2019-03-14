@@ -19,6 +19,9 @@ namespace TournamentApi.Data.Mappers
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
+
+
+
            
         }
     }

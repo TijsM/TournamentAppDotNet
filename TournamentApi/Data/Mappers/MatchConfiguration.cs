@@ -18,27 +18,27 @@ namespace TournamentApi.Data.Mappers
             builder.HasOne(m => m.Player1)
                 .WithMany()
                 .IsRequired(true)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             builder.HasOne(m => m.Player2)
                 .WithMany()
                 .IsRequired(true)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             builder.HasOne(m => m.Winner)
                 .WithMany()
                 .IsRequired(true)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             builder.HasOne(m => m.Loser)
                 .WithMany()
                 .IsRequired(true)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             builder.HasOne(m => m.Tournament)
                 .WithMany()
                 .IsRequired(true)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
         }
     }
