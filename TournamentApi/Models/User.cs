@@ -18,9 +18,22 @@ namespace TournamentApi.Models
         public Gender Gender { get; set; }
         public int RankInTournament { get; set; }
         public Tournament Tournament { get; set; }
-        public int TournamentId { get; set; }
+        public int? TournamentId { get; set; }
+
+        #endregion
+
+
+        #region Const
+        public User()
+        {
+
+        }
+
+
         #endregion
     }
 
-    
+
+
+
 }

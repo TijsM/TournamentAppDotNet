@@ -35,7 +35,7 @@ namespace TournamentApi.Controllers
         /// Gives all matches from a player
         /// </summary>
         /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <returns>all matches of u player</returns>
         [HttpGet("{userId}")]
         public IEnumerable<Match> getMatchesFromPlayer(int userId)
         {
@@ -44,10 +44,10 @@ namespace TournamentApi.Controllers
 
 
         /// <summary>
-        /// Gives all matches of a player
+        /// Get a match
         /// </summary>
-        /// <param name="id">id of the player</param>
-        /// <returns></returns>
+        /// <param name="id">id of the match</param>
+        /// <returns>a match</returns>
         [HttpGet("{id}")]
         public ActionResult<Match> GetMatch(int id)
         {

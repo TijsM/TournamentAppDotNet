@@ -12,7 +12,8 @@ namespace TournamentApi.Data
         #region Fields
         private readonly TournamentContext _dbContext;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly IList<Match> _matches;
+       
+
         #endregion
 
 
@@ -31,11 +32,14 @@ namespace TournamentApi.Data
             _dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
             {
+                #region Tournament
                 Tournament tournamentMen = new Tournament { Name = "TournamentMen", EndDate = new DateTime(2019, 06, 01), StartDate = new DateTime(2019, 08, 31), Gender = Gender.Man };
                 Tournament tournamentWomen = new Tournament { Name = "TournamentWomen", EndDate = new DateTime(2019, 06, 01), StartDate = new DateTime(2019, 08, 31), Gender = Gender.woman };
                 _dbContext.Tournaments.Add(tournamentMen);
                 _dbContext.Tournaments.Add(tournamentWomen);
+                #endregion
 
+                #region Users
                 User RafaelNadal = new User { FirstName = "Rafael", FamilyName = "Nadal", TennisVlaanderenRanking = 10, DateOfBirth = new DateTime(1987, 06, 14), PhoneNumber = "+33499875447", Email = "rafael.nadal@gmail.com", Gender = Gender.Man };
                 User RogerFederer = new User { FirstName = "Roger", FamilyName = "Federer", TennisVlaanderenRanking = 15, DateOfBirth = new DateTime(1983, 02, 28), PhoneNumber = "+02485321456", Email = "roger.federer@gmail.com", Gender = Gender.Man };
                 User NovakDjokovich = new User { FirstName = "Novak", FamilyName = "Djokovich", TennisVlaanderenRanking = 10, DateOfBirth = new DateTime(1990, 02, 28), PhoneNumber = "+38458623554", Email = "novak.djokovich@gmail.com", Gender = Gender.Man };
@@ -48,11 +52,12 @@ namespace TournamentApi.Data
                 tournamentMen.Participants.Add(RogerFederer);
                 tournamentMen.Participants.Add(NovakDjokovich);
 
-
                 tournamentWomen.Participants.Add(KimKlijsters);
                 tournamentWomen.Participants.Add(MariaCharapova);
                 tournamentWomen.Participants.Add(JustineHenin);
+                #endregion
 
+                #region Matches
                 Match match1 = new Match(RafaelNadal, RogerFederer);
                 Match match2 = new Match(RafaelNadal, NovakDjokovich);
                 Match match3 = new Match(RogerFederer, RafaelNadal);
@@ -67,32 +72,37 @@ namespace TournamentApi.Data
                 Match match11 = new Match(JustineHenin, KimKlijsters);
                 Match match12 = new Match(JustineHenin, MariaCharapova);
 
-                _dbContext.Matches.AddRange(match1
-                    , match2
-                    , match3
-                    , match4
-                    , match5
-                    , match6
-                    , match7
-                    , match8
-                    , match9
-                    , match10
-                    , match11
-                    , match12
-                    );
-                    
+
+                tournamentMen.Matches.Add(match1);
+                tournamentMen.Matches.Add(match2);
+                tournamentMen.Matches.Add(match3);
+                tournamentMen.Matches.Add(match4);
+                tournamentMen.Matches.Add(match5);
+                tournamentMen.Matches.Add(match6);
+                tournamentWomen.Matches.Add(match7);
+                tournamentWomen.Matches.Add(match8);
+                tournamentWomen.Matches.Add(match9);
+                tournamentWomen.Matches.Add(match10);
+                tournamentWomen.Matches.Add(match11);
+                tournamentWomen.Matches.Add(match12);
+                #endregion
 
 
-                foreach(User u in tournamentMen.Participants)
+                #region Accounts
+                foreach (User u in tournamentMen.Participants)
                 {
                     await CreateUser(u.Email, "P@ssword1111");
 
                 }
 
-                foreach(User u in tournamentWomen.Participants)
+                foreach (User u in tournamentWomen.Participants)
                 {
                     await CreateUser(u.Email, "P@ssword1111");
-                }
+                } 
+                #endregion
+
+
+
 
                 _dbContext.SaveChanges();
 

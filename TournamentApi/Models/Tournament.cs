@@ -16,7 +16,7 @@ namespace TournamentApi.Models
         public DateTime StartDate { get; set; }
         public Gender Gender { get; set; }
         public ICollection<User> Participants { get; set; }
-        public IEnumerable<Match> Matches { get; set; }
+        public ICollection<Match> Matches { get; set; }
 
         #endregion
 
@@ -24,15 +24,19 @@ namespace TournamentApi.Models
         public Tournament()
         {
             Participants = new List<User>();
+            Matches = new List<Match>();
         }
         #endregion
 
         #region Methods
         public void AddUser(User user)
         {
-            Participants.Add(user);
+            Participants.Add(user);           
+        }
 
-            
+        public void AddMatch(Match match)
+        {
+            Matches.Add(match);
         }
 
         private void OrderParticpantsbyRankTennisVlaanderen()
@@ -48,6 +52,8 @@ namespace TournamentApi.Models
                 .OrderBy(t => t.RankInTournament)
                 .ToList();
         }
+
+        
         #endregion
     }
 }

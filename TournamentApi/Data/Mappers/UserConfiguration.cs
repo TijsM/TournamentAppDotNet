@@ -19,6 +19,13 @@ namespace TournamentApi.Data.Mappers
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
+            builder.HasMany(u => u.UserMatches)
+                .WithOne()
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            
+
 
 
 

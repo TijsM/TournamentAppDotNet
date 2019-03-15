@@ -15,6 +15,7 @@ namespace TournamentApi.Data
         public DbSet<User> Users_domain { get; set; }
         public DbSet<Tournament> Tournaments { get; set; }
         public DbSet<Match> Matches { get; set; }
+        public DbSet<UserMatch> UserMatches { get; set; }
         #endregion
 
 
@@ -33,6 +34,7 @@ namespace TournamentApi.Data
             builder.ApplyConfiguration(new TournamentConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new MatchConfiguration());
+            builder.ApplyConfiguration(new UserMatchConfiguration());
         } 
         #endregion
     }

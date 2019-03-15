@@ -15,21 +15,25 @@ namespace TournamentApi.Models
         public int MatchId { get; set; }
         public User Player1 { get; set; }
         public User Player2 { get; set; }
+        public IEnumerable<UserMatch> UserMatches { get; set; }
         public int GamesWonPlayer1set1 { get; set; }
         public int GamesWonPlayer1Set2 { get; set; }
         public int GamesWonPlayer1Set3 { get; set; }
         public int GamesWonPlayer2Set1 { get; set; }
         public int GamesWonPlayer2Set2 { get; set; }
         public int GamesWonPlayer2Set3 { get; set; }
-        public User Winner { get; set; }
-        public User Loser { get; set; }
-        public Tournament Tournament { get; set; }
+        public bool Player1Won { get; set; }
+        public bool Player2Won { get; set; }
+
         #endregion
 
         public Match(User player1, User player2)
         {
             Player1 = player1;
             Player2 = player2;
+            Player1Won = false;
+            Player2Won = false;
+            
         }
 
         public Match()
@@ -56,13 +60,11 @@ namespace TournamentApi.Models
         {
             if (_amountOfGamesWonPlayer1 >= 2)
             {
-                Winner = Player1;
-                Loser = Player2;
+                Player1Won = true;
             }
             else
             {
-                Winner = Player2;
-                Loser = Player1;
+                Player2Won = true;
             }
         }
 
