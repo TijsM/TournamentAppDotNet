@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TournamentApi.Models.User">
+    <Position X="6" Y="2.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AhAAAEAAACAAAACAAAAEQAgAAQAQAAAEAAAAAAAAQAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Tournament" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Matches" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="TournamentApi.Models.UserMatch">
+    <Position X="1.5" Y="5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAhAgAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\UserMatch.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Match" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TournamentApi.Models.Match">
+    <Position X="1.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Player2" Type="TournamentApi.Models.User" ManuallyRouted="true">
+      <Path>
+        <Point X="3" Y="2.922" />
+        <Point X="6" Y="2.922" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAkAAAENAAAAAAAwAAAAEAAACAAAgAAAAAABAAAQAA=</HashCode>
+      <FileName>Models\Match.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Player2" />
+      <Property Name="Player1" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TournamentApi.Models.Tournament">
+    <Position X="8.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAQAAAAAAAAQACAAQAAAAQgAAAEAAAgACAAAEAAAAA=</HashCode>
+      <FileName>Models\Tournament.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Matches" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Interface Name="TournamentApi.Models.IUserRepository" Collapsed="true">
+    <Position X="10.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAIAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAEAIA=</HashCode>
+      <FileName>Models\IUserRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TournamentApi.Models.ITournamentRepository" Collapsed="true">
+    <Position X="12" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAIAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAEAIA=</HashCode>
+      <FileName>Models\ITournamentRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="TournamentApi.Models.Gender" Collapsed="true">
+    <Position X="10.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Models\Gender.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="8.83" />
+</ClassDiagram>
