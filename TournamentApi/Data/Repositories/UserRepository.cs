@@ -31,7 +31,8 @@ namespace TournamentApi.Data.Repositories
 
         public IEnumerable<User> GetAll()
         {
-            return _users.Include(u => u.Tournament)
+            return _users
+                //.Include(u => u.Tournament)
                  .OrderBy(u => u.TennisVlaanderenRanking)
                  .ThenBy(u => u.FirstName)
                  .ToList(); 

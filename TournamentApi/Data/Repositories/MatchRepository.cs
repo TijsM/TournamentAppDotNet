@@ -33,8 +33,6 @@ namespace TournamentApi.Data.Repositories
             return _matches
                 .Include(m => m.Player1)
                 .Include(m => m.Player2)
-                //.Include(m => m.UserMatches)
-                //.Include(m => m.Tournament)
                 .ToList();
         }
 
@@ -44,8 +42,6 @@ namespace TournamentApi.Data.Repositories
                 .Where(m => m.Player1.UserId == userId || m.Player2.UserId == userId)
                 .Include(m => m.Player1)
                 .Include(m => m.Player2)
-                //.Include(m => m.UserMatches)
-                //.Include(m => m.Tournament)
                 .ToList();
         }
 

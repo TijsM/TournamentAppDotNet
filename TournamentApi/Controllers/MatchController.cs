@@ -5,11 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TournamentApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TournamentApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class MatchController : ControllerBase
     {
 
