@@ -15,7 +15,7 @@ namespace TournamentApi.Data.Mappers
             builder.HasKey(u => u.UserId);
 
             builder.HasOne(u => u.Tournament)
-                .WithMany(t => t.Participants)
+                .WithMany(t => t.Users)
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 

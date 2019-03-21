@@ -26,7 +26,7 @@ namespace TournamentApi.Controllers
         private readonly IConfiguration _config;
 
 
-        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager,IUserRepository userRepository,IConfiguration config)
+        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IUserRepository userRepository, IConfiguration config)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -95,7 +95,7 @@ namespace TournamentApi.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        
+
     }
 
 

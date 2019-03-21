@@ -31,14 +31,14 @@ namespace TournamentApi.Data.Repositories
         public IEnumerable<Tournament> GetAll()
         {
             return _tournaments
-                .Include(t => t.Participants)
+                .Include(t => t.Users)
                 .ToList();
         }
 
         public Tournament GetById(int id)
         {
             return _tournaments
-                .Include(t => t.Participants)
+                .Include(t => t.Users)
                 .SingleOrDefault(t => t.TournamentId == id);
         }
 

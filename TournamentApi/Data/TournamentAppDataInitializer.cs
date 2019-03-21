@@ -39,6 +39,7 @@ namespace TournamentApi.Data
                 _dbContext.Tournaments.Add(tournamentWomen);
                 #endregion
 
+
                 #region Users
                 User RafaelNadal = new User { FirstName = "Rafael", FamilyName = "Nadal", TennisVlaanderenRanking = 10, DateOfBirth = new DateTime(1987, 06, 14), PhoneNumber = "+33499875447", Email = "rafael.nadal@gmail.com", Gender = Gender.Man };
                 User RogerFederer = new User { FirstName = "Roger", FamilyName = "Federer", TennisVlaanderenRanking = 15, DateOfBirth = new DateTime(1983, 02, 28), PhoneNumber = "+02485321456", Email = "roger.federer@gmail.com", Gender = Gender.Man };
@@ -48,13 +49,13 @@ namespace TournamentApi.Data
                 User MariaCharapova = new User { FirstName = "Maria", FamilyName = "Charapova", TennisVlaanderenRanking = 15, DateOfBirth = new DateTime(1993, 11, 09), PhoneNumber = "+32458745221", Email = "maria.charapova@gmail.com", Gender = Gender.woman };
                 User JustineHenin = new User { FirstName = "Justine", FamilyName = "Henin", TennisVlaanderenRanking = 20, DateOfBirth = new DateTime(1983, 03, 09), PhoneNumber = "+32488754221", Email = "justine.henin@gmail.com", Gender = Gender.woman };
 
-                tournamentMen.Participants.Add(RafaelNadal);
-                tournamentMen.Participants.Add(RogerFederer);
-                tournamentMen.Participants.Add(NovakDjokovich);
+                tournamentMen.Users.Add(RafaelNadal);
+                tournamentMen.Users.Add(RogerFederer);
+                tournamentMen.Users.Add(NovakDjokovich);
 
-                tournamentWomen.Participants.Add(KimKlijsters);
-                tournamentWomen.Participants.Add(MariaCharapova);
-                tournamentWomen.Participants.Add(JustineHenin);
+                tournamentWomen.Users.Add(KimKlijsters);
+                tournamentWomen.Users.Add(MariaCharapova);
+                tournamentWomen.Users.Add(JustineHenin);
                 #endregion
 
                 #region Matches
@@ -89,13 +90,13 @@ namespace TournamentApi.Data
 
 
                 #region Accounts
-                foreach (User u in tournamentMen.Participants)
+                foreach (User u in tournamentMen.Users)
                 {
                     await CreateUser(u.Email, "P@ssword1111");
 
                 }
 
-                foreach (User u in tournamentWomen.Participants)
+                foreach (User u in tournamentWomen.Users)
                 {
                     await CreateUser(u.Email, "P@ssword1111");
                 } 
