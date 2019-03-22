@@ -42,7 +42,7 @@ namespace TournamentApi.Data.Repositories
         public User GetById(int id)
         {
             return _users
-                .Include(u => u.Tournament)
+                //.Include(u => u.Tournament)
                 .SingleOrDefault(u => u.UserId == id);
         }
 

@@ -31,6 +31,7 @@ namespace TournamentApi.Models
         #region Methods
         public void AddUser(User user)
         {
+            user.RankInTournament = Users.Count() + 1;
             Users.Add(user);
         }
 
