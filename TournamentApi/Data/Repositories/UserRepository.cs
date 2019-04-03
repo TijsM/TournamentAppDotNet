@@ -33,7 +33,7 @@ namespace TournamentApi.Data.Repositories
         {
             return _users
                 //.Include(u => u.Tournament)
-                 .OrderBy(u => u.TennisVlaanderenRanking)
+                 .OrderBy(u => u.RankInTournament)
                  .ThenBy(u => u.FirstName)
                  .ToList(); 
 

@@ -45,14 +45,34 @@ namespace TournamentApi.Data.Repositories
                 .ToList();
         }
 
+        public IEnumerable<Match> GetMatchesWonFromPlayer(int userId)
+        {
+            return _matches
+                .Where(m => m.Winner.UserId == userId)
+                .Include(m => m.Player1)
+                .Include(m => m.Player2)
+                .ToList();
+        }
+
+        public IEnumerable<Match> GetMatchesLostFromPlayer(int userId)
+        {
+            return _matches
+              .Where(m => m.Loser.UserId == userId)
+              .Include(m => m.Player1)
+              .Include(m => m.Player2)
+              .ToList();
+        }
+
         public Match GetById(int id)
         {
             return _matches
                 .Include(m => m.Player1)
-                .Include(m => m.Player2)
-                .Include(m => m.UserMatches)
+                .Include(m => m.Player2) 
+                //.Include(m => m.UserMatches)  //zou included moeten zijn, maar krijg dan can't parse json fout in swagger
                 .SingleOrDefault(m => m.MatchId == id);
         }
+
+        
 
         public void SaveChanges()
         {
@@ -63,5 +83,7 @@ namespace TournamentApi.Data.Repositories
         {
             _matches.Update(match);
         }
+
+       
     }
 }

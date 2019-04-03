@@ -17,7 +17,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="TournamentApi.Models.UserMatch">
-    <Position X="1.25" Y="5.25" Width="1.5" />
+    <Position X="1.75" Y="5.25" Width="1.5" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
@@ -32,19 +32,16 @@
   </Class>
   <Class Name="TournamentApi.Models.Match">
     <Position X="1.5" Y="0.75" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
-    <AssociationLine Name="Player2" Type="TournamentApi.Models.User" ManuallyRouted="true">
+    <AssociationLine Name="Player2" Type="TournamentApi.Models.User" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="3" Y="3.172" />
-        <Point X="4.5" Y="3.172" />
+        <Point X="3" Y="2.938" />
+        <Point X="4.5" Y="2.938" />
         <Point X="4.5" Y="2.922" />
         <Point X="6" Y="2.922" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAkAAAENAAAAAAAwAAAAEAAACAAAgAAAAAABAAAQAA=</HashCode>
+      <HashCode>AAAgAAAENAAAAAAAwAAAAEAAACAAAgAAAAAABAAAQAA=</HashCode>
       <FileName>Models\Match.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -55,12 +52,11 @@
   <Class Name="TournamentApi.Models.Tournament">
     <Position X="8.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAQAAAAAAAAQACAAQAAAAQgAAAEAAAgACAAAEAAAAA=</HashCode>
+      <HashCode>ABAAACAAAAAAQACAAIAAAAQgAAAEAAAiAAAAAEAAAAA=</HashCode>
       <FileName>Models\Tournament.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Property Name="Matches" />
-      <Property Name="Participants" />
     </ShowAsCollectionAssociation>
   </Class>
   <Interface Name="TournamentApi.Models.IUserRepository" Collapsed="true">

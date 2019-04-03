@@ -34,6 +34,12 @@ namespace TournamentApi.Controllers
             return _userRepository.GetAll();
         }
 
+        [HttpGet("GetAverageTennisVlaanderenScore")]
+        public ActionResult<int> GetAverageTennisVlaanderenScore()
+        {
+            return Convert.ToInt32(_userRepository.GetAll().Average(u => u.TennisVlaanderenRanking));
+        }
+
 
         /// <summary>
         /// Get the user with the given id

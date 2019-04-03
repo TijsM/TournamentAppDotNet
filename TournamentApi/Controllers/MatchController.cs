@@ -41,11 +41,34 @@ namespace TournamentApi.Controllers
         /// </summary>
         /// <param name="userId"></param>
         /// <returns>all matches of u player</returns>
-        [HttpGet("{userId}")]
-        public IEnumerable<Match> getMatchesFromPlayer(int userId)
+        [HttpGet("GetMatchesVanSpeler/{userId}")]
+        public IEnumerable<Match> GetMatchesFromPlayer(int userId)
         {
             return _matchRepository.GetAllFromPlayer(userId);
         }
+
+        /// <summary>
+        /// Gives all the matches that a user has won
+        /// </summary>
+        /// <param name="userId">the id of the user</param>
+        /// <returns>returns a list of matches </returns>
+        [HttpGet("GetWonMatchesFromPlayer/{userId}")]
+        public IEnumerable<Match> GetWonMatchesFromPlayer(int userId)
+        {
+            return _matchRepository.GetMatchesWonFromPlayer(userId);
+        }
+
+        /// <summary>
+        /// Gives all the matches that a user has lost
+        /// </summary>
+        /// <param name="userId">the id of the user</param>
+        /// <returns>returns a list of matches </returns>
+        [HttpGet("GetLostMatchesFromPlayer/{userId}")]
+        public IEnumerable<Match> GetLostMatchesFromPlayer(int userId)
+        {
+            return _matchRepository.GetMatchesLostFromPlayer(userId);
+        }
+
 
 
         /// <summary>

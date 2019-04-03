@@ -9,6 +9,8 @@ namespace TournamentApi.Models
     {
         IEnumerable<Match> GetAll();
         IEnumerable<Match> GetAllFromPlayer(int userId);
+        IEnumerable<Match> GetMatchesWonFromPlayer(int userId);
+        IEnumerable<Match> GetMatchesLostFromPlayer(int userId);
         Match GetById(int id);
         void Add(Match match);
         void Delete(Match match);

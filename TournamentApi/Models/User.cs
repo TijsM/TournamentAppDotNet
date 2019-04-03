@@ -18,14 +18,15 @@ namespace TournamentApi.Models
         public Gender Gender { get; set; }
         public int RankInTournament { get; set; }
         public Tournament Tournament { get; set; }
-        public IEnumerable<UserMatch> UserMatches { get; set; }
-        public IEnumerable<Match> Matches { get; set; }
+        public ICollection<UserMatch> UserMatches { get; set; }
+        public ICollection<Match> Matches { get; set; }
         #endregion
 
 
-        #region Const
+        #region Constructor
         public User()
         {
+            
 
         }
 
