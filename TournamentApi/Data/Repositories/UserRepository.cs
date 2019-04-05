@@ -39,10 +39,18 @@ namespace TournamentApi.Data.Repositories
 
         }
 
+        public User GetByEmail(string email)
+        {
+            return _users
+                 .Where(u => u.Email.Equals(email))
+                 .SingleOrDefault(u => u.Email.Equals(email));
+        }
+
         public User GetById(int id)
         {
             return _users
                 //.Include(u => u.Tournament)
+                .Include(u => u.UserMatches)
                 .SingleOrDefault(u => u.UserId == id);
         }
 

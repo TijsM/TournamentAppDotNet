@@ -13,32 +13,47 @@ namespace TournamentApi.Models
 
         #region Properties
         public int MatchId { get; set; }
-        public User Player1 { get; set; }
-        public User Player2 { get; set; }
+
         public ICollection<UserMatch> UserMatches { get; set; }
-        public int GamesWonPlayer1Set1 { get; set; }
-        public int GamesWonPlayer1Set2 { get; set; }
-        public int GamesWonPlayer1Set3 { get; set; }
-        public int GamesWonPlayer2Set1 { get; set; }
-        public int GamesWonPlayer2Set2 { get; set; }
-        public int GamesWonPlayer2Set3 { get; set; }
-        //public bool Player1Won { get; set; }
-        //public bool Player2Won { get; set; }
-        public User Winner { get; set; }
-        public User Loser { get; set; }
+        //public int GamesWonPlayer1Set1 { get; set; }
+        //public int GamesWonPlayer1Set2 { get; set; }
+        //public int GamesWonPlayer1Set3 { get; set; }
+        //public int GamesWonPlayer2Set1 { get; set; }
+        //public int GamesWonPlayer2Set2 { get; set; }
+        //public int GamesWonPlayer2Set3 { get; set; }
+
+       public UserMatch Player1 { get {return UserMatches.FirstOrDefault(u => u.Player1 == true); }  }
+       public UserMatch Player2 { get {return UserMatches.FirstOrDefault(u => u.Player1 == false); }  }
+       public UserMatch Winner { get {return UserMatches.FirstOrDefault(u => u.Winner == true); }  }
+       public UserMatch Loser { get {return UserMatches.FirstOrDefault(u => u.Winner == false); }  }
 
         #endregion
 
         public Match(User player1, User player2)
         {
-            Player1 = player1;
-            Player2 = player2;
-            //Player1Won = false;
-            //Player2Won = false;
-
             UserMatches = new List<UserMatch>();
-            UserMatches.Add(new UserMatch(Player1.UserId, Player1, MatchId, this));
-            UserMatches.Add(new UserMatch(Player2.UserId, Player2, MatchId, this));
+
+            UserMatches.Add(new UserMatch()
+            {
+                User = player1,
+                Player1 = true,
+                UserId = player1.UserId,
+                MatchId = this.MatchId,
+                Match = this
+            });
+
+            UserMatches.Add(new UserMatch()
+            {
+                User = player2,
+                Player1 = false,
+                UserId = player2.UserId,
+                MatchId = this.MatchId,
+                Match = this
+            });
+
+           
+
+            
 
         }
 
@@ -51,13 +66,23 @@ namespace TournamentApi.Models
 
         public void RegisterScore(int gp1s1, int gp1s2, int gp1s3, int gp2s1, int gp2s2 = 0, int gp2s3 = 0)
         {
-            GamesWonPlayer1Set1 = gp1s1;
-            GamesWonPlayer1Set2 = gp1s2;
-            GamesWonPlayer1Set3 = gp1s3;
+            //gp1s1 = games player 1 set 0
 
-            GamesWonPlayer2Set1 = gp2s1;
-            GamesWonPlayer2Set2 = gp2s2;
-            GamesWonPlayer2Set3 = gp2s3;
+            Player1.GamesWonSet1 = gp1s1;
+            Player1.GamesWonSet2 = gp1s2;
+            Player1.GamesWonSet3 = gp1s3;
+
+            Player2.GamesWonSet1 = gp2s1;
+            Player2.GamesWonSet2 = gp2s2;
+            Player2.GamesWonSet3 = gp2s3;
+
+            //GamesWonPlayer1Set1 = gp1s1;
+            //GamesWonPlayer1Set2 = gp1s2;
+            //GamesWonPlayer1Set3 = gp1s3;
+
+            //GamesWonPlayer2Set1 = gp2s1;
+            //GamesWonPlayer2Set2 = gp2s2;
+            //GamesWonPlayer2Set3 = gp2s3;
 
             if (gp1s1 > gp2s1)
                 _amountOfGamesWonPlayer1++;
@@ -75,13 +100,16 @@ namespace TournamentApi.Models
         {
             if (_amountOfGamesWonPlayer1 >= 2)
             {
-                Winner = Player1;
-                Loser = Player2;
+
+                Player2.Winner = false;
+                Player1.Winner = true;
+                
             }
             else
             {
-                Winner = Player2;
-                Loser = Player2;
+                Player2.Winner = true;
+                Player1.Winner = false;
+
             }
         }
 

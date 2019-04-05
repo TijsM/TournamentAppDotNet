@@ -38,6 +38,7 @@ namespace TournamentApi.Models
         public void AddMatch(Match match)
         {
             Matches.Add(match);
+
         }
 
         private void OderUsersbyRankTennisVlaanderen()

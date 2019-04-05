@@ -14,10 +14,7 @@ namespace TournamentApi.Data.Mappers
         {
             builder.ToTable("Tournaments");
 
-            builder.HasMany(t => t.Users)
-                .WithOne(u => u.Tournament)
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.SetNull);
+      
 
             builder.HasMany(t => t.Matches)
                 .WithOne()

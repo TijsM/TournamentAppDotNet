@@ -69,8 +69,6 @@ namespace TournamentApi.Controllers
             return _matchRepository.GetMatchesLostFromPlayer(userId);
         }
 
-
-
         /// <summary>
         /// Get a match
         /// </summary>

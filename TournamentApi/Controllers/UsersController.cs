@@ -8,6 +8,7 @@ using TournamentApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
+using TournamentApi.DTO_s;
 
 namespace TournamentApi.Controllers
 {
@@ -34,6 +35,10 @@ namespace TournamentApi.Controllers
             return _userRepository.GetAll();
         }
 
+        /// <summary>
+        /// returns the average off the tennisvlaanderenscore of  all players 
+        /// </summary>
+        /// <returns>the average</returns>
         [HttpGet("GetAverageTennisVlaanderenScore")]
         public ActionResult<int> GetAverageTennisVlaanderenScore()
         {
@@ -47,13 +52,13 @@ namespace TournamentApi.Controllers
         /// <param name="id">the id of the user</param>
         /// <returns>The User</returns>
         [HttpGet("{id}")]
-        public ActionResult<User> getUser(int id)
+        public ActionResult<UserDetailDTO> getUser(int id)
         {
             User user = _userRepository.GetById(id);
             if (user == null)
                 return NotFound();
 
-            return user;
+            return new UserDetailDTO(user);
         }
 
         /// <summary>

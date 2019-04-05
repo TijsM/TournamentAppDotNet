@@ -19,22 +19,25 @@ namespace TournamentApi.Models
         public int RankInTournament { get; set; }
         public Tournament Tournament { get; set; }
         public ICollection<UserMatch> UserMatches { get; set; }
-        public ICollection<Match> Matches { get; set; }
+        //public ICollection<Match> Matches { get; set; }
+        public string Token { get;  set; }
         #endregion
 
 
         #region Constructor
         public User()
         {
-            
+            UserMatches = new List<UserMatch>();
 
         }
-
-
-
-
-
+        
         #endregion
+
+
+        public string getFullName()
+        {
+            return FirstName + " " + FamilyName;
+        }
     }
 
 

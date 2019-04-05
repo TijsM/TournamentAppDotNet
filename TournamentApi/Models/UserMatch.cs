@@ -11,7 +11,15 @@ namespace TournamentApi.Models
         public User User { get; set; }
         public int MatchId { get; set; }
         public Match Match { get; set; }
-        public bool PlayerHawWon { get; set; }
+
+        public bool Winner { get; set; }
+        public bool Player1 { get; set; }
+
+        public int GamesWonSet1 { get; set; }
+        public int GamesWonSet2 { get; set; }
+        public int GamesWonSet3 { get; set; }
+
+
 
 
         public UserMatch(int userId, User user, int matchId, Match match)
@@ -20,7 +28,6 @@ namespace TournamentApi.Models
             User = user;
             MatchId = matchId;
             Match = match;
-            PlayerHawWon = false;
         }
 
 

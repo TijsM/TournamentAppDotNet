@@ -13,33 +13,10 @@ namespace TournamentApi.Data.Mappers
         public void Configure(EntityTypeBuilder<Match> builder)
         {
             builder.ToTable("Matches");
-           
+         
+            
 
-
-            builder.HasOne(m => m.Player1)
-                .WithMany()
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasOne(m => m.Player2)
-                .WithMany()
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasOne(m => m.Winner)
-                .WithMany()
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasOne(m => m.Loser)
-                .WithMany()
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasMany(m => m.UserMatches)
-                .WithOne()
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.Restrict);
+            
         }
     }
 }

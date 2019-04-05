@@ -39,13 +39,14 @@ namespace TournamentApi.Controllers
         public async Task<ActionResult<String>> CreateToken(LoginDTO model)
         {
             var user = await _userManager.FindByNameAsync(model.Email);
+            var UserIn = _userRepository.GetByEmail(model.Email);
             if (user != null)
             {
                 var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
                 if (result.Succeeded)
                 {
-                    string token = GetToken(user);
-                    return Created("", token); //returns only the token
+                    UserIn.Token = GetToken(user);
+                    return Ok(UserIn);
                 }
             }
             return BadRequest();
