@@ -11,6 +11,7 @@ namespace TournamentApi.Models
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string FamilyName { get; set; }
+
         public int TennisVlaanderenRanking { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }

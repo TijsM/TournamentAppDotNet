@@ -30,13 +30,15 @@ namespace TournamentApi.DTO_s
             Email = user.Email;
             Gender = user.Gender;
             RankInTournament = user.RankInTournament;
-            //Matches = user.User.Select(m => new MatchDTO()
-            //{
-            //    WinnerFullName = m.Winner.getFullName(),
-            //    WinnerId = m.Winner.UserId,
-            //    LoserFullName = m.Loser.getFullName(),
-            //    LoserId = m.Loser.UserId
-            //});
+
+            Matches = user.UserMatches.Select(m => new MatchDTO()
+            {
+                WinnerFullName = m.WinnerFullName,
+                LoserFullName = m.LoserFullName,
+                WinnerId = m.WinnerId,
+                LoserId = m.LoserId
+            });
+           
         }
 
         public UserDetailDTO()

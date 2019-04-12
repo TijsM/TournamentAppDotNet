@@ -1,25 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="TournamentApi.Models.User">
-    <Position X="6" Y="2.5" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AgAAAEAAACAAAACAAAAEQAgAAQgQAAAEAAAAAAABQAA=</HashCode>
-      <FileName>Models\User.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Tournament" />
-    </ShowAsAssociation>
-  </Class>
   <Class Name="TournamentApi.Models.UserMatch">
-    <Position X="1.75" Y="5.25" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
+    <Position X="5.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAhAgAAAAAAAAAAgACAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAhAgAAAAAAAAAAgACAAAgAAAAAQAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\UserMatch.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -27,19 +11,21 @@
       <Property Name="Match" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="TournamentApi.Models.Match">
-    <Position X="1.5" Y="0.75" Width="1.5" />
+  <Class Name="TournamentApi.Models.User">
+    <Position X="3.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAENBAAAAAAwACAAAAAACAAAAAAAAAABAAAQAA=</HashCode>
-      <FileName>Models\Match.cs</FileName>
+      <HashCode>AgAAAEAAACAAAACAAAAEQAgAAQgQAAAEAAAAAAABQAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Player2" />
-      <Property Name="Loser" />
+      <Property Name="Tournament" />
     </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="UserMatches" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="TournamentApi.Models.Tournament">
-    <Position X="8.75" Y="3.25" Width="1.5" />
+    <Position X="5.5" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAACAAAAAAQACAAIAAAAQgAAAEAAAiAAAAAEAAAAA=</HashCode>
       <FileName>Models\Tournament.cs</FileName>
@@ -48,22 +34,45 @@
       <Property Name="Matches" />
     </ShowAsCollectionAssociation>
   </Class>
+  <Class Name="TournamentApi.Models.Match">
+    <Position X="8.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAEABAAAAAAwACAAAAAACAAAAAAAAAABAAAQAA=</HashCode>
+      <FileName>Models\Match.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Loser" />
+      <Property Name="Player1" />
+      <Property Name="Player2" />
+      <Property Name="Winner" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="UserMatches" />
+    </ShowAsCollectionAssociation>
+  </Class>
   <Interface Name="TournamentApi.Models.IUserRepository" Collapsed="true">
-    <Position X="10.25" Y="0.75" Width="1.5" />
+    <Position X="0.5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAIAAAAAAAAAAAAAAAAAAAAAAAGAAAAAAgAAAAAEAIA=</HashCode>
       <FileName>Models\IUserRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="TournamentApi.Models.ITournamentRepository" Collapsed="true">
-    <Position X="12" Y="0.75" Width="1.5" />
+    <Position X="0.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAIAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAEAIA=</HashCode>
       <FileName>Models\ITournamentRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Interface Name="TournamentApi.Models.IMatchRepository" Collapsed="true">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gA4AAAAAAAAAAAAAAAAAAAAAAAEABAAAAgAEAAAAAIA=</HashCode>
+      <FileName>Models\IMatchRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Enum Name="TournamentApi.Models.Gender" Collapsed="true">
-    <Position X="10.25" Y="1.5" Width="1.5" />
+    <Position X="0.5" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
       <FileName>Models\Gender.cs</FileName>
