@@ -8,6 +8,7 @@ using TournamentApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
+using TournamentApi.DTO_s;
 
 namespace TournamentApi.Controllers
 {
@@ -29,7 +30,7 @@ namespace TournamentApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<Tournament> GetTournaments()
+        public IEnumerable<TournamentDTO> GetTournaments()
         {
             return _tournamentRepository.GetAll();
         }
@@ -41,9 +42,9 @@ namespace TournamentApi.Controllers
         /// <param name="id">id of the tournament</param>
         /// <returns>one tournament</returns>
         [HttpGet("{id}")]
-        public ActionResult<Tournament> GetTournament(int id)
+        public ActionResult<TournamentDTO> GetTournament(int id)
         {
-            Tournament tournament = _tournamentRepository.GetById(id);
+            TournamentDTO tournament = _tournamentRepository.GetById(id);
 
             if (tournament == null)
                 return NotFound();
@@ -90,14 +91,14 @@ namespace TournamentApi.Controllers
         /// <param name="id">id of the to deleted tournament</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public ActionResult<Tournament> DeleteTournament(int id)
+        public ActionResult<TournamentDTO> DeleteTournament(int id)
         {
-            Tournament tournament = _tournamentRepository.GetById(id);
+            TournamentDTO tournament = _tournamentRepository.GetById(id);
 
             if (tournament == null)
                 return NotFound();
 
-            _tournamentRepository.Delete(tournament);
+            _tournamentRepository.Delete(tournament.TournamentId);
             _tournamentRepository.SaveChanges();
             return tournament;
 

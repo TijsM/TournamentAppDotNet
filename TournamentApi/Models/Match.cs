@@ -17,7 +17,7 @@ namespace TournamentApi.Models
         public ICollection<UserMatch> UserMatches { get; set; }
 
         public UserMatch Player1 { get { return UserMatches.FirstOrDefault(u => u.Player1 == true); } }
-        public UserMatch Player2 { get { return UserMatches.FirstOrDefault(u => u.Player1 == false); } }
+        public UserMatch Player2 { get { return UserMatches.FirstOrDefault(u => u.Player1 == false);} }
         public UserMatch Winner { get { return UserMatches.FirstOrDefault(u => u.Winner == true); } }
         public UserMatch Loser { get { return UserMatches.FirstOrDefault(u => u.Winner == false); } }
 
@@ -45,16 +45,12 @@ namespace TournamentApi.Models
                 Match = this
             });
 
-
-
-
-
         }
 
         public Match()
         {
-
-
+            UserMatches =  new List<UserMatch>();
+            
         }
 
 

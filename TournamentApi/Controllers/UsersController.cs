@@ -30,9 +30,18 @@ namespace TournamentApi.Controllers
         /// </summary>
         /// <returns>list of users</returns>
         [HttpGet]
-        public IEnumerable<User> GetUsers()
+        public IEnumerable<UserDetailDTO> GetUsers()
         {
-            return _userRepository.GetAll();
+            var users =  _userRepository.GetAll();
+
+
+            IList<UserDetailDTO> DTOList = new List<UserDetailDTO>();
+            foreach(var u in users)
+            {
+                DTOList.Add(new UserDetailDTO(u));
+            }
+
+            return DTOList;
         }
 
         /// <summary>
@@ -45,7 +54,7 @@ namespace TournamentApi.Controllers
             return Convert.ToInt32(_userRepository.GetAll().Average(u => u.TennisVlaanderenRanking));
         }
 
-
+       
         /// <summary>
         /// Get the user with the given id
         /// </summary>

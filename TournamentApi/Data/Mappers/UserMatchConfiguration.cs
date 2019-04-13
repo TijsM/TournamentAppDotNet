@@ -19,6 +19,7 @@ namespace TournamentApi.Data.Mappers
             builder
                 .HasOne(um => um.Match)
                 .WithMany(m => m.UserMatches)
+
                 .HasForeignKey(um => um.MatchId)
                 .OnDelete(DeleteBehavior.Restrict);
 

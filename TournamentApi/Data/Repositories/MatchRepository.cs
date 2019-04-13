@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TournamentApi.DTO_s;
 using TournamentApi.Models;
 
 namespace TournamentApi.Data.Repositories
@@ -23,56 +24,75 @@ namespace TournamentApi.Data.Repositories
             _matches.Add(match);
         }
 
-        public void Delete(Match match)
+        public void Delete(int id)
         {
+            var match = _matches.SingleOrDefault(m => m.MatchId == id);
+
+
             _matches.Remove(match);
         }
 
-        public IEnumerable<Match> GetAll()
+        public IEnumerable<MatchDTO> GetAll()
         {
-            return _matches
-                .Include(m => m.Player1)
-                .Include(m => m.Player2)
-                .ToList();
+            var matches = _matches
+               .Include(m => m.UserMatches)
+               .ThenInclude(um => um.User)
+               .ToList();
+
+            return MakeMatchDTOList(matches);
         }
 
-        public IEnumerable<Match> GetAllFromPlayer(int userId)
+
+
+        public IEnumerable<MatchDTO> GetAllFromPlayer(int userId)
         {
-            return _matches
-                .Where(m => m.Player1.UserId == userId || m.Player2.UserId == userId)
-                .Include(m => m.Player1)
-                .Include(m => m.Player2)
-                .ToList();
+            var matches = _matches
+               .Include(m => m.UserMatches)
+               .ThenInclude(um => um.User)
+               .Where(m => m.Player1.UserId == userId || m.Player2.UserId == userId) //dit lijntje geeft error
+               .ToList();
+
+            return MakeMatchDTOList(matches);
+
+
         }
 
-        public IEnumerable<Match> GetMatchesWonFromPlayer(int userId)
+        public IEnumerable<MatchDTO> GetMatchesWonFromPlayer(int userId)
         {
-            return _matches
-                .Where(m => m.Winner.UserId == userId)
-                .Include(m => m.Player1)
-                .Include(m => m.Player2)
+            var matches = _matches
+               .Where(m => m.Winner.UserId == userId)
+               .Include(m => m.UserMatches)
+               .ThenInclude(um => um.User)
                 .ToList();
+
+            return MakeMatchDTOList(matches);
+
         }
 
-        public IEnumerable<Match> GetMatchesLostFromPlayer(int userId)
+        public IEnumerable<MatchDTO> GetMatchesLostFromPlayer(int userId)
         {
-            return _matches
+            var matches = _matches
               .Where(m => m.Loser.UserId == userId)
-              .Include(m => m.Player1)
-              .Include(m => m.Player2)
+              .Include(m => m.UserMatches)
+              .ThenInclude(um => um.User)
               .ToList();
+
+            return MakeMatchDTOList(matches);
+
         }
 
-        public Match GetById(int id)
+        public MatchDTO GetById(int id)
         {
-            return _matches
-                .Include(m => m.Player1)
-                .Include(m => m.Player2) 
-                //.Include(m => m.UserMatches)  //zou included moeten zijn, maar krijg dan can't parse json fout in swagger
-                .SingleOrDefault(m => m.MatchId == id);
+            var match = _matches
+               .Include(m => m.UserMatches)
+               .ThenInclude(um => um.User)
+               .SingleOrDefault(m => m.MatchId == id);
+
+            return MakeMatchDTO(match);
+
         }
 
-        
+
 
         public void SaveChanges()
         {
@@ -84,6 +104,32 @@ namespace TournamentApi.Data.Repositories
             _matches.Update(match);
         }
 
-       
+
+
+        private IList<MatchDTO> MakeMatchDTOList(List<Match> matchList)
+        {
+            IList<MatchDTO> dtolijst = new List<MatchDTO>();
+            foreach (var match in matchList)
+            {
+                dtolijst.Add(MakeMatchDTO(match));
+            }
+            return dtolijst;
+        }
+
+        private MatchDTO MakeMatchDTO(Match match)
+        {
+            return new MatchDTO()
+            {
+                MatchId = match.MatchId,
+                WinnerFullName = match.Winner.WinnerFullName,
+                LoserFullName = match.Loser.LoserFullName,
+                WinnerId = match.Winner.WinnerId,
+                LoserId = match.Loser.LoserId
+            };
+
+
+
+        }
+
     }
 }

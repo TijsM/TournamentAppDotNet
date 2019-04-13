@@ -8,6 +8,7 @@ namespace TournamentApi.DTO_s
 {
     public class UserDetailDTO
     {
+        public int UserId { get; set; }
         public string FirstName { get; set; }
         public string FamilyName { get; set; }
         public int TennisVlaanderenRanking { get; set; }
@@ -22,6 +23,7 @@ namespace TournamentApi.DTO_s
 
         public UserDetailDTO(User user)
         {
+            UserId = user.UserId;
             FirstName = user.FirstName;
             FamilyName = user.FamilyName;
             TennisVlaanderenRanking = user.TennisVlaanderenRanking;
@@ -33,6 +35,7 @@ namespace TournamentApi.DTO_s
 
             Matches = user.UserMatches.Select(m => new MatchDTO()
             {
+                MatchId = m.MatchId,
                 WinnerFullName = m.WinnerFullName,
                 LoserFullName = m.LoserFullName,
                 WinnerId = m.WinnerId,

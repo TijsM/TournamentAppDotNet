@@ -33,7 +33,9 @@ namespace TournamentApi.Data.Repositories
         {
             return _users
                 //.Include(u => u.Tournament)
+                .Include(u => u.UserMatches)
                  .OrderBy(u => u.RankInTournament)
+                 
                  .ThenBy(u => u.FirstName)
                  .ToList(); 
 

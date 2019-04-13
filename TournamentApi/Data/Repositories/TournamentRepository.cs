@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TournamentApi.DTO_s;
 using TournamentApi.Models;
 
 namespace TournamentApi.Data.Repositories
@@ -23,23 +24,30 @@ namespace TournamentApi.Data.Repositories
             _tournaments.Add(tournament);
         }
 
-        public void Delete(Tournament tournament)
+        public void Delete(int id)
         {
-            _tournaments.Remove(tournament);
+             var t = _tournaments
+                .SingleOrDefault(n => n.TournamentId == id);
+
+            _tournaments.Remove(t);
         }
 
-        public IEnumerable<Tournament> GetAll()
+        public IEnumerable<TournamentDTO> GetAll()
         {
-            return _tournaments
+            var tournaments =  _tournaments
                 .Include(t => t.Users)
                 .ToList();
+
+            return MakeTournamentDTOList(tournaments);
         }
 
-        public Tournament GetById(int id)
+        public TournamentDTO GetById(int id)
         {
-            return _tournaments
+            var tour =  _tournaments
                 .Include(t => t.Users)
                 .SingleOrDefault(t => t.TournamentId == id);
+
+            return new TournamentDTO(tour);
         }
 
         public void SaveChanges()
@@ -51,5 +59,19 @@ namespace TournamentApi.Data.Repositories
         {
             _tournaments.Update(tournament);
         }
+
+        private IList<TournamentDTO> MakeTournamentDTOList(List<Tournament> tournamentList)
+        {
+            IList<TournamentDTO> dtoList = new List<TournamentDTO>();
+            foreach(var t in tournamentList)
+            {
+                dtoList.Add(new TournamentDTO(t));
+            }
+
+            return dtoList;
+        }
+
+
+
     }
 }

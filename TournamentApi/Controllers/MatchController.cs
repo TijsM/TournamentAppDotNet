@@ -8,6 +8,7 @@ using TournamentApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
+using TournamentApi.DTO_s;
 
 namespace TournamentApi.Controllers
 {
@@ -30,9 +31,9 @@ namespace TournamentApi.Controllers
         /// </summary>
         /// <returns>All matches</returns>
         [HttpGet]
-        public IEnumerable<Match> GetMatches()
+        public IEnumerable<MatchDTO> GetMatches()
         {
-            return _matchRepository.GetAll();
+            return _matchRepository.GetAll();            
         }
 
 
@@ -42,10 +43,10 @@ namespace TournamentApi.Controllers
         /// <param name="userId"></param>
         /// <returns>all matches of u player</returns>
         [HttpGet("GetMatchesVanSpeler/{userId}")]
-        public IEnumerable<Match> GetMatchesFromPlayer(int userId)
+        public IEnumerable<MatchDTO> GetMatchesFromPlayer(int userId)
         {
-            return _matchRepository.GetAllFromPlayer(userId);
-        }
+            return _matchRepository.GetAll().Where(m => m.WinnerId == userId  || m.LoserId == userId);
+        }//aanpassen zodat gefilterd wordt in repo, en niet in controller
 
         /// <summary>
         /// Gives all the matches that a user has won
@@ -53,10 +54,10 @@ namespace TournamentApi.Controllers
         /// <param name="userId">the id of the user</param>
         /// <returns>returns a list of matches </returns>
         [HttpGet("GetWonMatchesFromPlayer/{userId}")]
-        public IEnumerable<Match> GetWonMatchesFromPlayer(int userId)
+        public IEnumerable<MatchDTO> GetWonMatchesFromPlayer(int userId)
         {
-            return _matchRepository.GetMatchesWonFromPlayer(userId);
-        }
+            return _matchRepository.GetAll().Where(m => m.WinnerId == userId);
+        }//aanpassen zodat gefilterd wordt in repo, en niet in controller
 
         /// <summary>
         /// Gives all the matches that a user has lost
@@ -64,10 +65,10 @@ namespace TournamentApi.Controllers
         /// <param name="userId">the id of the user</param>
         /// <returns>returns a list of matches </returns>
         [HttpGet("GetLostMatchesFromPlayer/{userId}")]
-        public IEnumerable<Match> GetLostMatchesFromPlayer(int userId)
+        public IEnumerable<MatchDTO> GetLostMatchesFromPlayer(int userId)
         {
-            return _matchRepository.GetMatchesLostFromPlayer(userId);
-        }
+            return _matchRepository.GetAll().Where(m => m.LoserId == userId);
+        }//aanpassen zodat gefilterd wordt in repo, en niet in controller
 
         /// <summary>
         /// Get a match
@@ -75,9 +76,9 @@ namespace TournamentApi.Controllers
         /// <param name="id">id of the match</param>
         /// <returns>a match</returns>
         [HttpGet("{id}")]
-        public ActionResult<Match> GetMatch(int id)
+        public ActionResult<MatchDTO> GetMatch(int id)
         {
-            Match match = _matchRepository.GetById(id);
+            MatchDTO match = _matchRepository.GetById(id);
 
             if (match == null)
                 return NotFound();
@@ -124,14 +125,14 @@ namespace TournamentApi.Controllers
         /// <param name="id">id of the match</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public ActionResult<Match> DeleteMatch(int id)
+        public ActionResult<MatchDTO> DeleteMatch(int id)
         {
-            Match match = _matchRepository.GetById(id);
+            MatchDTO match = _matchRepository.GetById(id);
 
             if (match == null)
                 return NotFound();
 
-            _matchRepository.Delete(match);
+            _matchRepository.Delete(match.MatchId);
             _matchRepository.SaveChanges();
 
             return match;

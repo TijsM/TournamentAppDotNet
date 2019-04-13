@@ -13,8 +13,9 @@ namespace TournamentApi.Data.Mappers
         public void Configure(EntityTypeBuilder<Match> builder)
         {
             builder.ToTable("Matches");
-         
-            
+
+
+
 
             
         }
