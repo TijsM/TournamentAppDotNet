@@ -19,8 +19,6 @@ namespace TournamentApi.DTO_s
         public int RankInTournament { get; set; }
         public IEnumerable<MatchDTO> Matches { get; set; }
 
-
-
         public UserDetailDTO(User user)
         {
             UserId = user.UserId;
@@ -40,6 +38,8 @@ namespace TournamentApi.DTO_s
                 LoserFullName = m.LoserFullName,
                 WinnerId = m.WinnerId,
                 LoserId = m.LoserId
+
+                
             });
            
         }

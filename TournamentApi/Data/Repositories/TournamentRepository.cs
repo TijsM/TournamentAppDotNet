@@ -41,7 +41,7 @@ namespace TournamentApi.Data.Repositories
             return MakeTournamentDTOList(tournaments);
         }
 
-        public TournamentDTO GetById(int id)
+        public TournamentDTO GetByIdDTO(int id)
         {
             var tour =  _tournaments
                 .Include(t => t.Users)
@@ -49,6 +49,16 @@ namespace TournamentApi.Data.Repositories
 
             return new TournamentDTO(tour);
         }
+
+        public Tournament GetById(int id)
+        {
+            return _tournaments
+                .Include(t => t.Users)
+                .SingleOrDefault(t => t.TournamentId == id);
+
+            
+        }
+
 
         public void SaveChanges()
         {

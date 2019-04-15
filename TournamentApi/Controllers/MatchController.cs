@@ -86,19 +86,19 @@ namespace TournamentApi.Controllers
             return match;
         }
 
-        /// <summary>
-        /// creates a match
-        /// </summary>
-        /// <param name="match"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult<Match> AddMatch(Match match)
-        {
-            _matchRepository.Add(match);
-            _matchRepository.SaveChanges();
+        ///// <summary>
+        ///// creates a match
+        ///// </summary>
+        ///// <param name="match"></param>
+        ///// <returns></returns>
+        //[HttpPost]
+        //public ActionResult<Match> AddMatch(Match match)
+        //{
+        //    _matchRepository.Add(match);
+        //    _matchRepository.SaveChanges();
 
-            return CreatedAtAction(nameof(GetMatch), new { id = match.MatchId }, match);
-        }
+        //    return CreatedAtAction(nameof(GetMatch), new { id = match.MatchId }, match);
+        //}
 
 
         /// <summary>

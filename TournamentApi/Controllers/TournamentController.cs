@@ -20,10 +20,16 @@ namespace TournamentApi.Controllers
     public class TournamentController : ControllerBase
     {
         private readonly ITournamentRepository _tournamentRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IMatchRepository _matchRepository;
 
-        public TournamentController(ITournamentRepository tournamentRepository)
+        public TournamentController(ITournamentRepository tournamentRepository, IUserRepository userRepository, IMatchRepository matchRepository)
         {
             _tournamentRepository = tournamentRepository;
+            _userRepository = userRepository;
+            _matchRepository = matchRepository;
+
+
         }
         /// <summary>
         /// get all Tournaments
@@ -33,6 +39,7 @@ namespace TournamentApi.Controllers
         public IEnumerable<TournamentDTO> GetTournaments()
         {
             return _tournamentRepository.GetAll();
+            
         }
 
 
@@ -44,7 +51,7 @@ namespace TournamentApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<TournamentDTO> GetTournament(int id)
         {
-            TournamentDTO tournament = _tournamentRepository.GetById(id);
+            TournamentDTO tournament = _tournamentRepository.GetByIdDTO(id);
 
             if (tournament == null)
                 return NotFound();
@@ -93,7 +100,7 @@ namespace TournamentApi.Controllers
         [HttpDelete("{id}")]
         public ActionResult<TournamentDTO> DeleteTournament(int id)
         {
-            TournamentDTO tournament = _tournamentRepository.GetById(id);
+            TournamentDTO tournament = _tournamentRepository.GetByIdDTO(id);
 
             if (tournament == null)
                 return NotFound();
@@ -102,6 +109,31 @@ namespace TournamentApi.Controllers
             _tournamentRepository.SaveChanges();
             return tournament;
 
+        }
+
+        /// <summary>
+        /// Creates a match within a tournament
+        /// </summary>
+        /// <param name="tournamentId">the id of the tournament</param>
+        /// <param name="player1Id">the id of the loged in player</param>
+        /// <param name="player2Id">th id of the challenged player</param>
+        /// <returns></returns>
+        [HttpPost("AddMatchToTournament")]
+        public IActionResult AddMatchToTournament(int tournamentId, int player1Id, int player2Id)
+        {
+            var selectedTournament = _tournamentRepository.GetById(tournamentId);
+
+            User p1 = _userRepository.GetById(player1Id);
+            User p2 = _userRepository.GetById(player2Id);
+
+
+            Match m = new Match(p1, p2);
+
+            selectedTournament.AddMatch(m);
+            _matchRepository.Add(m);
+            _matchRepository.SaveChanges();
+
+            return NoContent();
         }
     }
 }
