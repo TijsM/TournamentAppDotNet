@@ -22,7 +22,6 @@ namespace TournamentApi.Models
                     return "";
             }
         }
-
         public string LoserFullName
         {
             get{
@@ -32,7 +31,6 @@ namespace TournamentApi.Models
                     return "";
             }
         }
-
         public int WinnerId
         {
             get
@@ -43,7 +41,6 @@ namespace TournamentApi.Models
                     return 0;
             }
         }
-
         public int LoserId
         {
             get
@@ -54,10 +51,7 @@ namespace TournamentApi.Models
                     return 0;
             }
         }
-
-
         public bool Player1 { get; set; }
-
         public int GamesWonSet1 { get; set; }
         public int GamesWonSet2 { get; set; }
         public int GamesWonSet3 { get; set; }

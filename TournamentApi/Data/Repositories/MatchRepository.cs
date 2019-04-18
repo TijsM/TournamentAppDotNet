@@ -124,7 +124,15 @@ namespace TournamentApi.Data.Repositories
                 WinnerFullName = match.Winner.WinnerFullName,
                 LoserFullName = match.Loser.LoserFullName,
                 WinnerId = match.Winner.WinnerId,
-                LoserId = match.Loser.LoserId
+                LoserId = match.Loser.LoserId,
+
+                WinnerSet1 = match.Winner.GamesWonSet1,
+                WinnerSet2 = match.Winner.GamesWonSet2,
+                WinnerSet3 = match.Winner.GamesWonSet3,
+
+                LoserSet1 = match.Loser.GamesWonSet1,
+                LoserSet2 = match.Loser.GamesWonSet2,
+                LoserSet3 = match.Loser.GamesWonSet3
             };
 
 

@@ -37,7 +37,11 @@ namespace TournamentApi.DTO_s
                 WinnerFullName = m.WinnerFullName,
                 LoserFullName = m.LoserFullName,
                 WinnerId = m.WinnerId,
-                LoserId = m.LoserId
+                LoserId = m.LoserId,
+
+                
+
+
 
                 
             });

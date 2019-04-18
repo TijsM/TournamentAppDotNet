@@ -34,6 +34,12 @@ namespace TournamentApi.Controllers
             _config = config;
         }
 
+
+        /// <summary>
+        /// Login
+        /// </summary>
+        /// <param name="model">Login details</param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<String>> CreateToken(LoginDTO model)
@@ -52,6 +58,11 @@ namespace TournamentApi.Controllers
             return BadRequest();
         }
 
+        /// <summary>
+        /// Register a user
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<String>> Register(RegisterDTO model)
@@ -59,9 +70,13 @@ namespace TournamentApi.Controllers
             IdentityUser identityuser = new IdentityUser { UserName = model.Email, Email = model.Email };
             User user = new User
             {
-                Email = model.Email,
                 FirstName = model.FirstName,
-                FamilyName = model.FamilyName
+                FamilyName = model.FamilyName,
+                DateOfBirth = model.DateOfBirth,
+                PhoneNumber = model.Phone,
+                Email = model.Email,
+                Gender = model.gender,
+      
             };
             var result = await _userManager.CreateAsync(identityuser, model.Password);
             if (result.Succeeded)

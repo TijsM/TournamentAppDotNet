@@ -54,7 +54,7 @@ namespace TournamentApi.Models
         }
 
 
-        public void RegisterScore(int gp1s1, int gp1s2, int gp1s3, int gp2s1, int gp2s2 = 0, int gp2s3 = 0)
+        public void RegisterScore(int gp1s1, int gp2s1, int gp1s2, int gp2s2, int gp1s3 = 0, int gp2s3 = 0)
         {
             //gp1s1 = games player 1 set 0
 
@@ -66,13 +66,6 @@ namespace TournamentApi.Models
             Player2.GamesWonSet2 = gp2s2;
             Player2.GamesWonSet3 = gp2s3;
 
-            //GamesWonPlayer1Set1 = gp1s1;
-            //GamesWonPlayer1Set2 = gp1s2;
-            //GamesWonPlayer1Set3 = gp1s3;
-
-            //GamesWonPlayer2Set1 = gp2s1;
-            //GamesWonPlayer2Set2 = gp2s2;
-            //GamesWonPlayer2Set3 = gp2s3;
 
             if (gp1s1 > gp2s1)
                 _amountOfGamesWonPlayer1++;

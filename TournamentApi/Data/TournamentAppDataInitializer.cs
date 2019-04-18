@@ -120,7 +120,7 @@ namespace TournamentApi.Data
 
                 #region MatchResults
                 match1.RegisterScore(6, 4, 4, 6, 0, 6);
-                match2.RegisterScore(6, 4, 4, 6);
+                match2.RegisterScore(6, 4, 4, 6, 6, 0);
                 match3.RegisterScore(2,6,6,2,7,6);
                 match4.RegisterScore(0,6,4,6);
                 match5.RegisterScore(2,6,6,4,7,6);

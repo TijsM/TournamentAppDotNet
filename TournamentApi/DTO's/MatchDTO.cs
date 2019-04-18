@@ -13,12 +13,12 @@ namespace TournamentApi.DTO_s
         public string LoserFullName { get; set; }
         public int LoserId { get; set; }
 
-        public int p1s1 { get; set; }
-        public int p1s2 { get; set; }
-        public int p1s3 { get; set; }
-        public int p2s1 { get; set; }
-        public int p2s2 { get; set; }
-        public int p2s3 { get; set; }
+        public int WinnerSet1 { get; set; }
+        public int WinnerSet2 { get; set; }
+        public int WinnerSet3 { get; set; }
+        public int LoserSet1 { get; set; }
+        public int LoserSet2 { get; set; }
+        public int LoserSet3 { get; set; }
 
 
 
