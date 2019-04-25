@@ -45,6 +45,13 @@ namespace TournamentApi.Models
                 Match = this
             });
 
+            Player2.Winner = false;
+            Player1.Winner = true;
+
+            
+
+
+
 
 
         }
