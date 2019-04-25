@@ -32,7 +32,7 @@ namespace TournamentApi.Data.Repositories
         public IEnumerable<User> GetAll()
         {
             return _users
-                //.Include(u => u.Tournament)
+                .Include(u => u.Tournament)
                 .Include(u => u.UserMatches)
                  .OrderBy(u => u.RankInTournament)
                  
@@ -51,7 +51,7 @@ namespace TournamentApi.Data.Repositories
         public User GetById(int id)
         {
             return _users
-                //.Include(u => u.Tournament)
+                .Include(u => u.Tournament)
                 .Include(u => u.UserMatches)
                 .SingleOrDefault(u => u.UserId == id);
         }

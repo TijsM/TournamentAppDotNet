@@ -30,6 +30,9 @@ namespace TournamentApi.DTO_s
         [Required]
         public Gender gender { get; set; }
 
+        [Required]
+        public int TennisVlaanderenScore { get; set; }
+
 
     }
 }

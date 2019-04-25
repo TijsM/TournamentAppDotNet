@@ -119,12 +119,12 @@ namespace TournamentApi.Controllers
         /// <param name="player2Id">th id of the challenged player</param>
         /// <returns></returns>
         [HttpPost("AddMatchToTournament")]
-        public IActionResult AddMatchToTournament(int tournamentId, int player1Id, int player2Id)
+        public IActionResult AddMatchToTournament(TournamentDTO dto)
         {
-            var selectedTournament = _tournamentRepository.GetById(tournamentId);
+            var selectedTournament = _tournamentRepository.GetById(dto.TournamentId);
 
-            User p1 = _userRepository.GetById(player1Id);
-            User p2 = _userRepository.GetById(player2Id);
+            User p1 = _userRepository.GetById(dto.Player1Id);
+            User p2 = _userRepository.GetById(dto.Player2Id);
 
 
             Match m = new Match(p1, p2);

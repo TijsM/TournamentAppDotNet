@@ -16,17 +16,19 @@ namespace TournamentApi.DTO_s
         public Gender Gender { get; set; }
         public IEnumerable<UserDetailDTO> Users { get; set; }
         public IEnumerable<Match> Matches { get; set; }
+        public int Player1Id { get; set; }
+        public int Player2Id { get; set; }
 
-        public TournamentDTO(Tournament tournament)
-        {
-            TournamentId = tournament.TournamentId;
-            Name = tournament.Name;
-            EndDate = tournament.EndDate;
-            StartDate = tournament.StartDate;
-            Gender = tournament.Gender;
-            Users = tournament.Users.Select(t => new UserDetailDTO(t));
-            Matches = tournament.Matches;
-        }
+        //public TournamentDTO(Tournament tournament)
+        //{
+        //    TournamentId = tournament.TournamentId;
+        //    Name = tournament.Name;
+        //    EndDate = tournament.EndDate;
+        //    StartDate = tournament.StartDate;
+        //    Gender = tournament.Gender;
+        //    Users = tournament.Users.Select(t => new UserDetailDTO(t));
+        //    Matches = tournament.Matches;
+        //}
 
     }
 }

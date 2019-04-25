@@ -23,14 +23,16 @@ namespace TournamentApi.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IUserRepository _userRepository;
+        private readonly ITournamentRepository _tournamentRepository;
         private readonly IConfiguration _config;
 
 
-        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IUserRepository userRepository, IConfiguration config)
+        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IUserRepository userRepository, IConfiguration config, ITournamentRepository tournamentRepository)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _userRepository = userRepository;
+            _tournamentRepository = tournamentRepository;
             _config = config;
         }
 
@@ -76,8 +78,20 @@ namespace TournamentApi.Controllers
                 PhoneNumber = model.Phone,
                 Email = model.Email,
                 Gender = model.gender,
-      
+                TennisVlaanderenRanking = model.TennisVlaanderenScore    
             };
+
+            int genderid;
+            if (user.Gender == Gender.Man)
+                genderid = 2;
+            else
+            {
+                genderid = 1;
+            }
+
+            Tournament tour = _tournamentRepository.GetById(genderid);
+            tour.AddUser(user);
+
             var result = await _userManager.CreateAsync(identityuser, model.Password);
             if (result.Succeeded)
             {
@@ -87,6 +101,15 @@ namespace TournamentApi.Controllers
                 return Created("", token);
             }
             return BadRequest();
+
+        }
+
+        [AllowAnonymous]
+        [HttpGet("checkusername")]
+        public async Task<ActionResult<Boolean>> CheckAvailableUserName(string email)
+        {
+            var user = await _userManager.FindByNameAsync(email);
+            return user == null;
         }
 
         private String GetToken(IdentityUser user)

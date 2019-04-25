@@ -31,12 +31,15 @@ namespace TournamentApi.Models
         #region Methods
         public void AddUser(User user)
         {
+            user.Tournament = this;
             user.RankInTournament = Users.Count() + 1;
             Users.Add(user);
+           
         }
 
         public void AddMatch(Match match)
         {
+            
             Matches.Add(match);
 
         }

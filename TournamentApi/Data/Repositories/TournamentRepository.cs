@@ -43,11 +43,11 @@ namespace TournamentApi.Data.Repositories
 
         public TournamentDTO GetByIdDTO(int id)
         {
-            var tour =  _tournaments
-                .Include(t => t.Users)
-                .SingleOrDefault(t => t.TournamentId == id);
+            var t =  _tournaments
+                .Include(tour => tour.Users)
+                .SingleOrDefault(tour => tour.TournamentId == id);
 
-            return new TournamentDTO(tour);
+            return new TournamentDTO { TournamentId = t.TournamentId, EndDate = t.EndDate, Gender = t.Gender, Matches = t.Matches, Name = t.Name, StartDate = t.StartDate, Users = t.Users.Select(tour => new UserDetailDTO(tour)) };
         }
 
         public Tournament GetById(int id)
@@ -75,7 +75,7 @@ namespace TournamentApi.Data.Repositories
             IList<TournamentDTO> dtoList = new List<TournamentDTO>();
             foreach(var t in tournamentList)
             {
-                dtoList.Add(new TournamentDTO(t));
+                dtoList.Add(new TournamentDTO { TournamentId = t.TournamentId, EndDate = t.EndDate, Gender = t.Gender, Matches = t.Matches, Name = t.Name, StartDate = t.StartDate, Users = t.Users.Select(tour => new UserDetailDTO(tour)) });
             }
 
             return dtoList;

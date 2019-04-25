@@ -20,20 +20,20 @@ namespace TournamentApi.Models
         public UserMatch Player2 { get { return UserMatches.FirstOrDefault(u => u.Player1 == false);} }
         public UserMatch Winner { get { return UserMatches.FirstOrDefault(u => u.Winner == true); } }
         public UserMatch Loser { get { return UserMatches.FirstOrDefault(u => u.Winner == false); } }
-
         #endregion
 
         public Match(User player1, User player2)
         {
             UserMatches = new List<UserMatch>();
-
+            
+           
             UserMatches.Add(new UserMatch()
             {
                 User = player1,
                 Player1 = true,
                 UserId = player1.UserId,
                 MatchId = this.MatchId,
-                Match = this
+                Match = this        
             });
 
             UserMatches.Add(new UserMatch()
@@ -44,6 +44,8 @@ namespace TournamentApi.Models
                 MatchId = this.MatchId,
                 Match = this
             });
+
+
 
         }
 
