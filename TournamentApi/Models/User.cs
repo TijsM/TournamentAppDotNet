@@ -22,6 +22,7 @@ namespace TournamentApi.Models
         public ICollection<UserMatch> UserMatches { get; set; }
         //public ICollection<Match> Matches { get; set; }
         public string Token { get;  set; }
+        public Boolean HasChallenge { get; set; }
         #endregion
 
 
@@ -29,7 +30,7 @@ namespace TournamentApi.Models
         public User()
         {
             UserMatches = new List<UserMatch>();
-
+            HasChallenge = false;
         }
         
         #endregion

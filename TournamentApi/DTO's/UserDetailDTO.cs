@@ -19,6 +19,7 @@ namespace TournamentApi.DTO_s
         public int RankInTournament { get; set; }
         public IEnumerable<MatchDTO> Matches { get; set; }
         public int TournamentId { get; set; }
+        public Boolean HasChallenge { get; set; }
 
 
         public UserDetailDTO(User user)
@@ -33,6 +34,7 @@ namespace TournamentApi.DTO_s
             Gender = user.Gender;
             RankInTournament = user.RankInTournament;
             TournamentId = user.Tournament.TournamentId;
+            HasChallenge = user.HasChallenge;
 
             Matches = user.UserMatches.Select(m => new MatchDTO()
             {

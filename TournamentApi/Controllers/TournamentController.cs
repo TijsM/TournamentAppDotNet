@@ -124,7 +124,9 @@ namespace TournamentApi.Controllers
             var selectedTournament = _tournamentRepository.GetById(dto.TournamentId);
 
             User p1 = _userRepository.GetById(dto.Player1Id);
+            p1.HasChallenge = true; 
             User p2 = _userRepository.GetById(dto.Player2Id);
+            p2.HasChallenge = true;
 
 
             Match m = new Match(p1, p2);

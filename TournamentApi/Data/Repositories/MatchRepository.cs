@@ -37,6 +37,7 @@ namespace TournamentApi.Data.Repositories
             var matches = _matches
                .Include(m => m.UserMatches)
                .ThenInclude(um => um.User)
+               .OrderBy(m => m.MatchId)
                .ToList();
 
             return MakeMatchDTOList(matches);
@@ -50,6 +51,7 @@ namespace TournamentApi.Data.Repositories
                .Include(m => m.UserMatches)
                .ThenInclude(um => um.User)
                .Where(m => m.Player1.UserId == userId || m.Player2.UserId == userId) //dit lijntje geeft error
+               .OrderBy(m => m.MatchId)
                .ToList();
 
             return MakeMatchDTOList(matches);
@@ -63,6 +65,7 @@ namespace TournamentApi.Data.Repositories
                .Where(m => m.Winner.UserId == userId)
                .Include(m => m.UserMatches)
                .ThenInclude(um => um.User)
+               .OrderBy(m => m.MatchId)
                 .ToList();
 
             return MakeMatchDTOList(matches);
@@ -75,6 +78,7 @@ namespace TournamentApi.Data.Repositories
               .Where(m => m.Loser.UserId == userId)
               .Include(m => m.UserMatches)
               .ThenInclude(um => um.User)
+              .OrderBy(m => m.MatchId)
               .ToList();
 
             return MakeMatchDTOList(matches);
