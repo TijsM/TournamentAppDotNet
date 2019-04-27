@@ -41,6 +41,7 @@ namespace TournamentApi.Models
         {
             
             Matches.Add(match);
+            Console.WriteLine(this);
 
         }
 

@@ -124,18 +124,39 @@ namespace TournamentApi.Controllers
             var selectedTournament = _tournamentRepository.GetById(dto.TournamentId);
 
             User p1 = _userRepository.GetById(dto.Player1Id);
-            p1.HasChallenge = true; 
+            p1.HasChallenge = true;  
             User p2 = _userRepository.GetById(dto.Player2Id);
             p2.HasChallenge = true;
 
-
             Match m = new Match(p1, p2);
-
             selectedTournament.AddMatch(m);
+
             _matchRepository.Add(m);
-            _matchRepository.SaveChanges();
+            _tournamentRepository.SaveChanges();
+
+            addPendingMatchToUsers(p1, p2);
 
             return NoContent();
+        }
+
+        private Match createPendingMatch(Match m)
+        {
+            return new Match()
+            {
+                MatchId = m.MatchId,
+                UserMatches = m.UserMatches
+            };
+        }
+
+        private void addPendingMatchToUsers(User p1, User p2)
+        {
+
+            Match theNewMatch = _matchRepository.GetMatchWithMaxId();
+
+
+            p1.PendingMatch = theNewMatch;
+            p2.PendingMatch = theNewMatch;
+            _tournamentRepository.SaveChanges();
         }
     }
 }

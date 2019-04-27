@@ -32,6 +32,8 @@ namespace TournamentApi.Controllers
         [HttpGet]
         public IEnumerable<UserDetailDTO> GetUsers()
         {
+
+
             var users =  _userRepository.GetAll();
 
 

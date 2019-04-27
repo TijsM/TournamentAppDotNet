@@ -34,6 +34,7 @@ namespace TournamentApi.Data.Repositories
             return _users
                 .Include(u => u.Tournament)
                 .Include(u => u.UserMatches)
+                .Include(u => u.PendingMatch)
                  .OrderBy(u => u.RankInTournament)
                  
                  .ThenBy(u => u.FirstName)
@@ -53,6 +54,7 @@ namespace TournamentApi.Data.Repositories
             return _users
                 .Include(u => u.Tournament)
                 .Include(u => u.UserMatches)
+                .Include(u => u.PendingMatch)
                 .SingleOrDefault(u => u.UserId == id);
         }
 

@@ -23,6 +23,23 @@ namespace TournamentApi.Data.Repositories
         {
             _matches.Add(match);
         }
+        
+
+        public Match GetMatchWithMaxId()
+        {
+            var matches = _matches
+                .Include(m => m.UserMatches)
+                .ThenInclude(um => um.User)
+                .OrderBy(m => m.MatchId)
+                .ToList();
+
+            int ma  = matches.Max<Match>(m => m.MatchId);
+
+
+            return GetByIdMatch(ma);
+
+        }
+
 
         public void Delete(int id)
         {
@@ -139,6 +156,19 @@ namespace TournamentApi.Data.Repositories
                 LoserSet3 = match.Loser.GamesWonSet3
             };
 
+
+
+        }
+
+
+
+
+        public Match GetByIdMatch(int id)
+        {
+            return _matches
+               .Include(m => m.UserMatches)
+               .ThenInclude(um => um.User)
+               .SingleOrDefault(m => m.MatchId == id);
 
 
         }

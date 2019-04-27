@@ -17,5 +17,7 @@ namespace TournamentApi.Models
         void Delete(int id);
         void Update(Match match);
         void SaveChanges();
+        Match GetMatchWithMaxId();
+
     }
 }

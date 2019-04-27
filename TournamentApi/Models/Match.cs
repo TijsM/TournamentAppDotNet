@@ -48,18 +48,11 @@ namespace TournamentApi.Models
             Player2.Winner = false;
             Player1.Winner = true;
 
-            
-
-
-
-
-
         }
 
         public Match()
         {
             UserMatches =  new List<UserMatch>();
-            
         }
 
 

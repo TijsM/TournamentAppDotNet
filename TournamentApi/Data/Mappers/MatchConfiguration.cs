@@ -13,8 +13,8 @@ namespace TournamentApi.Data.Mappers
         public void Configure(EntityTypeBuilder<Match> builder)
         {
             builder.ToTable("Matches");
-
-
+            builder.HasKey(m => m.MatchId);
+            
 
 
             

@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TournamentApi.Data.Repositories;
+using TournamentApi.DTO_s;
 
 namespace TournamentApi.Models
 {
     public class User
     {
-        #region Properties
+           #region Properties
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string FamilyName { get; set; }
-
         public int TennisVlaanderenRanking { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
@@ -23,6 +24,7 @@ namespace TournamentApi.Models
         //public ICollection<Match> Matches { get; set; }
         public string Token { get;  set; }
         public Boolean HasChallenge { get; set; }
+        public Match PendingMatch { get; set; }
         #endregion
 
 
@@ -31,6 +33,8 @@ namespace TournamentApi.Models
         {
             UserMatches = new List<UserMatch>();
             HasChallenge = false;
+
+           
         }
         
         #endregion

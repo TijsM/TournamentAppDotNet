@@ -20,6 +20,8 @@ namespace TournamentApi.DTO_s
         public IEnumerable<MatchDTO> Matches { get; set; }
         public int TournamentId { get; set; }
         public Boolean HasChallenge { get; set; }
+        public MatchDTO PendingMatch { get; set; } 
+        // instellen als hij wordt aangeroepen wordt, zit niet in ctor
 
 
         public UserDetailDTO(User user)
@@ -44,6 +46,21 @@ namespace TournamentApi.DTO_s
                 WinnerId = m.WinnerId,
                 LoserId = m.LoserId,
             });
+
+            if(user.PendingMatch != null)
+            {
+                PendingMatch = new MatchDTO
+                {
+                    MatchId = user.PendingMatch.MatchId,
+                    WinnerFullName = "onbekend",
+                    WinnerId = 0,
+                    LoserFullName = "onbekend",
+                    LoserId = 0
+                };
+            }
+
+            
+
            
         }
 
