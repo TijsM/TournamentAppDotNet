@@ -20,8 +20,8 @@ namespace TournamentApi.DTO_s
         public IEnumerable<MatchDTO> Matches { get; set; }
         public int TournamentId { get; set; }
         public Boolean HasChallenge { get; set; }
-        public MatchDTO PendingMatch { get; set; } 
-        // instellen als hij wordt aangeroepen wordt, zit niet in ctor
+        public MatchDTO PendingMatch { get; set; }
+
 
 
         public UserDetailDTO(User user)
@@ -47,22 +47,45 @@ namespace TournamentApi.DTO_s
                 LoserId = m.LoserId,
             });
 
-            if(user.PendingMatch != null)
+            if (user.PendingMatch != null)
+            {
+
+                if (user.PendingMatch.Player1 != null)
+                {
+                    PendingMatch = new MatchDTO
+                    {
+                        MatchId = user.PendingMatch.MatchId,
+                        WinnerFullName = user.PendingMatch.Player1.WinnerFullName,
+                        WinnerId = user.PendingMatch.Player1.UserId,
+                        LoserFullName = "tegenstander",
+                        LoserId = 0
+                    };
+                }
+                if (user.PendingMatch.Player2 != null)
+                {
+                    PendingMatch = new MatchDTO
+                    {
+                        MatchId = user.PendingMatch.MatchId,
+                        WinnerFullName = "tegenstander",
+                        WinnerId = 0,
+                        LoserFullName = user.PendingMatch.Player2.WinnerFullName,
+                        LoserId = user.PendingMatch.Player2.UserId
+                    };
+                }
+            }
+            else
             {
                 PendingMatch = new MatchDTO
                 {
-                    MatchId = user.PendingMatch.MatchId,
-                    WinnerFullName = "onbekend",
-                    WinnerId = 0,
-                    LoserFullName = "onbekend",
-                    LoserId = 0
+                    MatchId = 999999999,
+                    WinnerFullName = "heeft geen uitdaging",
+                    WinnerId = 999999999,
+                    LoserFullName = "heeft geen uitdaging",
+                    LoserId = 999999999
                 };
             }
-
-            
-
-           
         }
+
 
         public UserDetailDTO()
         {
