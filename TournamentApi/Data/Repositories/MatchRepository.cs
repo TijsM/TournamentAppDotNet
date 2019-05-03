@@ -12,11 +12,13 @@ namespace TournamentApi.Data.Repositories
     {
         private readonly TournamentContext _context;
         private readonly DbSet<Match> _matches;
+        private readonly IUserRepository _userRepository;
 
-        public MatchRepository(TournamentContext context)
+        public MatchRepository(TournamentContext context, IUserRepository userRepository)
         {
             _context = context;
             _matches = context.Matches;
+            this._userRepository = userRepository;
         }
 
         public void Add(Match match)
@@ -88,6 +90,7 @@ namespace TournamentApi.Data.Repositories
             return MakeMatchDTOList(matches);
 
         }
+        
 
         public IEnumerable<MatchDTO> GetMatchesLostFromPlayer(int userId)
         {
@@ -139,6 +142,10 @@ namespace TournamentApi.Data.Repositories
 
         private MatchDTO MakeMatchDTO(Match match)
         {
+
+            User winner = _userRepository.GetById(match.Winner.UserId);
+            User loser = _userRepository.GetById(match.Loser.UserId);
+
             return new MatchDTO()
             {
                 MatchId = match.MatchId,
@@ -153,15 +160,14 @@ namespace TournamentApi.Data.Repositories
 
                 LoserSet1 = match.Loser.GamesWonSet1,
                 LoserSet2 = match.Loser.GamesWonSet2,
-                LoserSet3 = match.Loser.GamesWonSet3
+                LoserSet3 = match.Loser.GamesWonSet3,
+
+                WinnerEmail = winner.Email,
+                WinnerPhoneNumber = winner.PhoneNumber,
+                loserEmail = loser.Email,
+                LoserPhoneNumber = loser.PhoneNumber
             };
-
-
-
         }
-
-
-
 
         public Match GetByIdMatch(int id)
         {
@@ -169,8 +175,6 @@ namespace TournamentApi.Data.Repositories
                .Include(m => m.UserMatches)
                .ThenInclude(um => um.User)
                .SingleOrDefault(m => m.MatchId == id);
-
-
         }
 
     }

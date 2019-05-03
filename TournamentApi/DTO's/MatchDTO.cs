@@ -21,6 +21,12 @@ namespace TournamentApi.DTO_s
         public int LoserSet3 { get; set; }
 
 
+        public String WinnerPhoneNumber { get; set; }
+        public String WinnerEmail { get; set; }
+        public String LoserPhoneNumber { get; set; }
+        public String loserEmail { get; set; }
+
+
 
 
 

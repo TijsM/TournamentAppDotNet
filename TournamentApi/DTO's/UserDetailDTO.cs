@@ -57,8 +57,12 @@ namespace TournamentApi.DTO_s
                         MatchId = user.PendingMatch.MatchId,
                         WinnerFullName = user.PendingMatch.Player1.WinnerFullName,
                         WinnerId = user.PendingMatch.Player1.UserId,
+                        WinnerEmail = user.Email,
+                        WinnerPhoneNumber = user.PhoneNumber,
                         LoserFullName = "tegenstander",
-                        LoserId = 0
+                        LoserId = 0,
+                        loserEmail = "onbekend",
+                        LoserPhoneNumber = "onbekend"
                     };
                 }
                 if (user.PendingMatch.Player2 != null)
@@ -68,8 +72,12 @@ namespace TournamentApi.DTO_s
                         MatchId = user.PendingMatch.MatchId,
                         WinnerFullName = "tegenstander",
                         WinnerId = 0,
+                        WinnerEmail = "onbekend",
+                        WinnerPhoneNumber = "onbekend",
                         LoserFullName = user.PendingMatch.Player2.WinnerFullName,
-                        LoserId = user.PendingMatch.Player2.UserId
+                        LoserId = user.PendingMatch.Player2.UserId,
+                        LoserPhoneNumber = user.PhoneNumber,
+                        loserEmail = user.Email
                     };
                 }
             }

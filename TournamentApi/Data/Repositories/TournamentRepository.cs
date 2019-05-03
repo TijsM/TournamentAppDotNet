@@ -12,12 +12,15 @@ namespace TournamentApi.Data.Repositories
     {
         private readonly TournamentContext _context;
         private readonly DbSet<Tournament> _tournaments;
+        private readonly IUserRepository _userRepository;
 
 
-        public TournamentRepository(TournamentContext context)
+
+        public TournamentRepository(TournamentContext context, IUserRepository userRepository )
         {
             _context = context;
             _tournaments = context.Tournaments;
+            _userRepository = userRepository;
         }
         public void Add(Tournament tournament)
         {
@@ -81,6 +84,42 @@ namespace TournamentApi.Data.Repositories
             return dtoList;
         }
 
+        public IEnumerable<UserDetailDTO> giveRanking(int tournamentId)
+        {
+
+            var users = _tournaments
+                
+                .Include(t => t.Users)
+                 .ThenInclude(u => u.UserMatches)
+                 .Include(t => t.Users)
+                .ThenInclude(u => u.PendingMatch)
+                .SingleOrDefault(t => t.TournamentId == tournamentId)
+                .Users
+                .OrderBy(u => u.RankInTournament)
+                .ToList();
+
+
+
+            return makeUserDTOList(users);
+
+
+        }
+
+
+        private IList<UserDetailDTO> makeUserDTOList(List<User> userLijst)
+        {
+            IList<UserDetailDTO> dtolijst = new List<UserDetailDTO>();
+            foreach (var u in userLijst)
+            {
+                dtolijst.Add(makeUserDTO(u));
+            }
+            return dtolijst;
+        }
+
+        private UserDetailDTO makeUserDTO(User u)
+        {
+            return new UserDetailDTO(u);
+        }
 
 
     }

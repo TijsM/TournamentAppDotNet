@@ -112,11 +112,9 @@ namespace TournamentApi.Controllers
         }
 
         /// <summary>
-        /// Creates a match within a tournament
+        /// creates a match within a tournament
         /// </summary>
-        /// <param name="tournamentId">the id of the tournament</param>
-        /// <param name="player1Id">the id of the loged in player</param>
-        /// <param name="player2Id">th id of the challenged player</param>
+        /// <param name="dto"> the match with its parameters</param>
         /// <returns></returns>
         [HttpPost("AddMatchToTournament")]
         public IActionResult AddMatchToTournament(TournamentDTO dto)
@@ -139,14 +137,27 @@ namespace TournamentApi.Controllers
             return NoContent();
         }
 
-        private Match createPendingMatch(Match m)
+        /// <summary>
+        /// gives the current ranking of a tournament
+        /// </summary>
+        /// <param name="tournamentId">id of the tournament</param>
+        /// <returns>list of users</returns>
+         [HttpGet("GiveRanking/{tournamentId}")]
+        public IEnumerable<UserDetailDTO> GiveRanking(int tournamentId)
         {
-            return new Match()
-            {
-                MatchId = m.MatchId,
-                UserMatches = m.UserMatches
-            };
+            return _tournamentRepository.giveRanking(tournamentId);
+
+
         }
+
+        //private Match createPendingMatch(Match m)
+        //{
+        //    return new Match()
+        //    {
+        //        MatchId = m.MatchId,
+        //        UserMatches = m.UserMatches
+        //    };
+        //}
 
         private void addPendingMatchToUsers(User p1, User p2)
         {

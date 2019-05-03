@@ -15,5 +15,6 @@ namespace TournamentApi.Models
         void Delete(int id);
         void update(Tournament tournament);
         void  SaveChanges();
+        IEnumerable<UserDetailDTO> giveRanking(int tournamentId);
     }
 }

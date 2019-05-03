@@ -20,10 +20,12 @@ namespace TournamentApi.Controllers
     {
 
         private readonly IMatchRepository _matchRepository;
+        private readonly IUserRepository _userRepository;
 
-        public MatchController(IMatchRepository matchRepository)
+        public MatchController(IMatchRepository matchRepository, IUserRepository userRepository)
         {
             _matchRepository = matchRepository;
+            _userRepository = userRepository;
         }
 
         /// <summary>
@@ -137,6 +139,49 @@ namespace TournamentApi.Controllers
 
             return match;
 
+        }
+        /// <summary>
+        /// insert a score of a finnished match
+        /// </summary>
+        /// <param name="match"></param>
+        /// <returns>nothing</returns>
+        [HttpPut("commitScore")]
+        public IActionResult CommitScore (MatchDTO match)
+        {
+            Match selectedMatch = _matchRepository.GetByIdMatch(match.MatchId);
+
+            if(selectedMatch.Player1.UserId == match.WinnerId)
+            {
+                //player1 = winner
+                selectedMatch.RegisterScore(
+                    match.WinnerSet1,
+                    match.LoserSet1,
+                    match.WinnerSet2,
+                    match.LoserSet2,
+                    match.WinnerSet3,
+                    match.LoserSet3);
+            }
+
+            else
+            {
+                //player 1 = loser
+                selectedMatch.RegisterScore(
+                    match.LoserSet1,
+                    match.WinnerSet1,
+                    match.LoserSet2,
+                    match.WinnerSet2,
+                    match.LoserSet3,
+                    match.WinnerSet3);
+            }
+
+            User p1 = _userRepository.GetById(selectedMatch.Player1.UserId);
+            User p2 = _userRepository.GetById(selectedMatch.Player2.UserId);
+
+            p1.HasChallenge = false;
+            p2.HasChallenge = false;
+
+            _matchRepository.SaveChanges();
+            return NoContent();
         }
 
     }

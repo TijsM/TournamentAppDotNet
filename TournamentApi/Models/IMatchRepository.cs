@@ -18,6 +18,8 @@ namespace TournamentApi.Models
         void Update(Match match);
         void SaveChanges();
         Match GetMatchWithMaxId();
+        Match GetByIdMatch(int id);
+
 
     }
 }
