@@ -149,8 +149,10 @@ namespace TournamentApi.Controllers
         public IActionResult CommitScore (MatchDTO match)
         {
             Match selectedMatch = _matchRepository.GetByIdMatch(match.MatchId);
+            User p1 = _userRepository.GetById(selectedMatch.Player1.UserId);
+            User p2 = _userRepository.GetById(selectedMatch.Player2.UserId);
 
-            if(selectedMatch.Player1.UserId == match.WinnerId)
+            if (selectedMatch.Player1.UserId == match.WinnerId)
             {
                 //player1 = winner
                 selectedMatch.RegisterScore(
@@ -159,7 +161,9 @@ namespace TournamentApi.Controllers
                     match.WinnerSet2,
                     match.LoserSet2,
                     match.WinnerSet3,
-                    match.LoserSet3);
+                    match.LoserSet3);   
+
+                
             }
 
             else
@@ -172,10 +176,14 @@ namespace TournamentApi.Controllers
                     match.WinnerSet2,
                     match.LoserSet3,
                     match.WinnerSet3);
+
+                int hulp = p1.RankInTournament;
+                p1.RankInTournament = p2.RankInTournament;
+                p2.RankInTournament = hulp;
             }
 
-            User p1 = _userRepository.GetById(selectedMatch.Player1.UserId);
-            User p2 = _userRepository.GetById(selectedMatch.Player2.UserId);
+            //User p1 = _userRepository.GetById(selectedMatch.Player1.UserId);
+            //User p2 = _userRepository.GetById(selectedMatch.Player2.UserId);
 
             p1.HasChallenge = false;
             p2.HasChallenge = false;
