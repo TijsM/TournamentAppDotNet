@@ -72,6 +72,16 @@ namespace TournamentApi.Controllers
             return new UserDetailDTO(user);
         }
 
+        [HttpGet("getUserNoIncludes/{id}")]
+        public ActionResult<UserDetailDTO> getUserNoIncludes(int id)
+        {
+            User user = _userRepository.getByIdNoIncludes(id);
+            if (user == null)
+                return NotFound();
+
+            return new UserDetailDTO(user);
+        }
+
         /// <summary>
         /// Creates a new user
         /// </summary>

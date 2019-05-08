@@ -35,7 +35,11 @@ namespace TournamentApi.DTO_s
             Email = user.Email;
             Gender = user.Gender;
             RankInTournament = user.RankInTournament;
-            TournamentId = user.Tournament.TournamentId;
+            if (user.Tournament != null)
+            {
+                TournamentId = user.Tournament.TournamentId; 
+            }
+            
             HasChallenge = user.HasChallenge;
 
             Matches = user.UserMatches.Select(m => new MatchDTO()

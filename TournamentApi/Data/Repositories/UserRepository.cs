@@ -58,6 +58,11 @@ namespace TournamentApi.Data.Repositories
                 .SingleOrDefault(u => u.UserId == id);
         }
 
+        public User getByIdNoIncludes(int id)
+        {
+            return _users.SingleOrDefault(u => u.UserId == id);
+        }
+
         public void SaveChanges()
         {
             _context.SaveChanges();

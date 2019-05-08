@@ -9,6 +9,7 @@ namespace TournamentApi.Models
     {
         IEnumerable<User> GetAll();
         User GetById(int id);
+        User getByIdNoIncludes(int id);
         User GetByEmail(string email);
         void Add(User user);
         void Delete(User user);
