@@ -14,8 +14,8 @@ namespace TournamentApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[AllowAnonymous]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class MatchController : ControllerBase
     {
 
@@ -71,6 +71,28 @@ namespace TournamentApi.Controllers
         {
             return _matchRepository.GetAll().Where(m => m.LoserId == userId);
         }//aanpassen zodat gefilterd wordt in repo, en niet in controller
+
+        /// <summary>
+        /// Gives the amount of lost matches of a user
+        /// </summary>
+        /// <param name="userId">the id of the user</param>
+        /// <returns>returns a list of matches </returns>
+        [HttpGet("GetAmountLostMatches/{userId}")]
+        public ActionResult<int> getAmountLostMatches(int userId)
+        {
+            return _matchRepository.GetAll().Where(m => m.LoserId == userId).Count();
+        }
+
+        /// <summary>
+        /// Gives the amount of lost matches of a user
+        /// </summary>
+        /// <param name="userId">the id of the user</param>
+        /// <returns>returns a list of matches </returns>
+        [HttpGet("GetAmountWonMatches/{userId}")]
+        public ActionResult<int> getAmountwonMatches(int userId)
+        {
+            return _matchRepository.GetAll().Where(m => m.WinnerId == userId).Count();
+        }
 
         /// <summary>
         /// Get a match
@@ -162,8 +184,6 @@ namespace TournamentApi.Controllers
                     match.LoserSet2,
                     match.WinnerSet3,
                     match.LoserSet3);   
-
-                
             }
 
             else
@@ -182,8 +202,6 @@ namespace TournamentApi.Controllers
                 p2.RankInTournament = hulp;
             }
 
-            //User p1 = _userRepository.GetById(selectedMatch.Player1.UserId);
-            //User p2 = _userRepository.GetById(selectedMatch.Player2.UserId);
 
             p1.HasChallenge = false;
             p2.HasChallenge = false;

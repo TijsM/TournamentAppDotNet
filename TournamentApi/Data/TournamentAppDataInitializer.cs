@@ -143,8 +143,6 @@ namespace TournamentApi.Data
                 match010.RegisterScore(6, 4, 6, 1);
                 match011.RegisterScore(0,6,6,0,6,0);
 
-                //Match pendingMatch = new Match(NovakDjokovich, RafaelNadal);
-                //tournamentMen.AddMatch(pendingMatch);
                 
                 #endregion
 

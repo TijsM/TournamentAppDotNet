@@ -101,7 +101,7 @@ namespace TournamentApi
             app.UseAuthentication();
 
 
-            tournamentAppDataInitializer.initializeData().Wait();
+            //tournamentAppDataInitializer.initializeData().Wait();
         }
     }
 }
