@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using TournamentApi.DTO_s;
 using TournamentApi.Models;
 
@@ -46,15 +47,15 @@ namespace TournamentApi.Controllers
         [HttpPost]
         public async Task<ActionResult<String>> CreateToken(LoginDTO model)
         {
-            var user = await _userManager.FindByNameAsync(model.Email);
-            var UserIn = _userRepository.GetByEmail(model.Email);
-            if (user != null)
+            IdentityUser idenUser = await _userManager.FindByNameAsync(model.Email);
+            User user = _userRepository.GetByEmail(model.Email);
+            if (idenUser != null)
             {
-                var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
+                var result = await _signInManager.CheckPasswordSignInAsync(idenUser, model.Password, false);
                 if (result.Succeeded)
                 {
-                    UserIn.Token = GetToken(user);
-                    return Ok(UserIn);
+                    user.Token = GetToken(idenUser);
+                    return Ok(user);
                 }
             }
             return BadRequest();
@@ -69,7 +70,29 @@ namespace TournamentApi.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<String>> Register(RegisterDTO model)
         {
-            IdentityUser identityuser = new IdentityUser { UserName = model.Email, Email = model.Email };
+            //IdentityUser user = new IdentityUser { UserName = model.Email, Email = model.Email };
+            //User newUser = new User
+            //{
+
+            //    FirstName = model.FirstName,
+            //    FamilyName = model.FamilyName,
+            //    DateOfBirth = model.DateOfBirth,
+            //    PhoneNumber = model.Phone,
+            //    Email = model.Email,
+            //    Gender = model.gender,
+            //    TennisVlaanderenRanking = model.TennisVlaanderenScore
+
+            //};
+            //var result = await _userManager.CreateAsync(user, model.Password);
+
+            //if (result.Succeeded)
+            //{
+            //    _userRepository.Add(newUser);
+            //    _userRepository.SaveChanges();
+            //    var us
+            //}
+
+            IdentityUser idenUser = new IdentityUser { UserName = model.Email, Email = model.Email };
             User user = new User
             {
                 FirstName = model.FirstName,
@@ -78,7 +101,7 @@ namespace TournamentApi.Controllers
                 PhoneNumber = model.Phone,
                 Email = model.Email,
                 Gender = model.gender,
-                TennisVlaanderenRanking = model.TennisVlaanderenScore    
+                TennisVlaanderenRanking = model.TennisVlaanderenScore
             };
 
             int genderid;
@@ -91,14 +114,21 @@ namespace TournamentApi.Controllers
 
             Tournament tour = _tournamentRepository.GetById(genderid);
             tour.AddUser(user);
-
-            var result = await _userManager.CreateAsync(identityuser, model.Password);
+            var result = await _userManager.CreateAsync(idenUser, model.Password);
             if (result.Succeeded)
             {
+                user.Token = GetToken(idenUser);
+
                 _userRepository.Add(user);
-                _userRepository.SaveChanges();
-                string token = GetToken(identityuser);
-                return Created("", token);
+                //_userRepository.SaveChanges();
+
+                Console.WriteLine(user);
+                UserDetailDTO usdto = new UserDetailDTO(user);
+
+                return Ok(usdto);
+
+
+
             }
             return BadRequest();
 
@@ -111,7 +141,7 @@ namespace TournamentApi.Controllers
             var user = await _userManager.FindByNameAsync(email);
             return user == null;
         }
-
+            
         private String GetToken(IdentityUser user)
         {
             // Create the token
