@@ -174,34 +174,36 @@ namespace TournamentApi.Controllers
             User p1 = _userRepository.GetById(selectedMatch.Player1.UserId);
             User p2 = _userRepository.GetById(selectedMatch.Player2.UserId);
 
-            if (selectedMatch.Player1.UserId == match.WinnerId)
-            {
-                //player1 = winner
-                selectedMatch.RegisterScore(
+            selectedMatch.RegisterScore(
                     match.WinnerSet1,
                     match.LoserSet1,
                     match.WinnerSet2,
                     match.LoserSet2,
                     match.WinnerSet3,
-                    match.LoserSet3);   
+                    match.LoserSet3);
+
+            if (selectedMatch.Player1.UserId == selectedMatch.Winner.WinnerId)
+            {
+                //player1 = winner
+
+                if(p1.RankInTournament < p2.RankInTournament)
+                {
+                    int hulp = p2.RankInTournament;
+                    p2.RankInTournament = p1.RankInTournament;
+                    p1.RankInTournament = hulp;
+                }
             }
 
             else
             {
-                //player 1 = loser
-                selectedMatch.RegisterScore(
-                    match.LoserSet1,
-                    match.WinnerSet1,
-                    match.LoserSet2,
-                    match.WinnerSet2,
-                    match.LoserSet3,
-                    match.WinnerSet3);
-
-                int hulp = p1.RankInTournament;
-                p1.RankInTournament = p2.RankInTournament;
-                p2.RankInTournament = hulp;
+                //player2 = winner
+                if (p2.RankInTournament < p1.RankInTournament)
+                {
+                    int hulp = p1.RankInTournament;
+                    p1.RankInTournament = p2.RankInTournament;
+                    p2.RankInTournament = hulp;
+                }
             }
-
 
             p1.HasChallenge = false;
             p2.HasChallenge = false;
