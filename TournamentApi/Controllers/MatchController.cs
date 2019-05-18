@@ -182,9 +182,9 @@ namespace TournamentApi.Controllers
                     match.WinnerSet3,
                     match.LoserSet3);
 
-            if (selectedMatch.Player1.UserId == selectedMatch.Winner.WinnerId)
+            if (selectedMatch.Player1.UserId != selectedMatch.Winner.WinnerId)
             {
-                //player1 = winner
+                
 
                 if(p1.RankInTournament < p2.RankInTournament)
                 {
@@ -196,7 +196,7 @@ namespace TournamentApi.Controllers
 
             else
             {
-                //player2 = winner
+
                 if (p2.RankInTournament < p1.RankInTournament)
                 {
                     int hulp = p1.RankInTournament;
