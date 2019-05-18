@@ -63,21 +63,32 @@ namespace TournamentApi
 
             services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<TournamentContext>();
 
-            services.AddAuthentication(x => {
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequiredUniqueChars = 0;
+            });
+
+            services.AddAuthentication(x =>
+            {
                 x.DefaultAuthenticateScheme =
                 JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x => {
-    x.RequireHttpsMetadata = false;
-    x.SaveToken = true;
-    x.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"])),
-        ValidateIssuer = false,
-        ValidateAudience = false,
-        RequireExpirationTime = true //Ensure token hasn't expired
-    };
-});
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false; x.SaveToken = true; x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"])),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    RequireExpirationTime = true //Ensure token hasn't expired
+                };
+            });
 
         }
 
@@ -101,7 +112,7 @@ namespace TournamentApi
             app.UseAuthentication();
 
 
-            //tournamentAppDataInitializer.initializeData().Wait();
+            tournamentAppDataInitializer.initializeData().Wait();
         }
     }
 }

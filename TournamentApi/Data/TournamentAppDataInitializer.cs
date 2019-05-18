@@ -45,6 +45,7 @@ namespace TournamentApi.Data
                 User NovakDjokovich = new User { FirstName = "Novak", FamilyName = "Djokovich", TennisVlaanderenRanking = 10, DateOfBirth = new DateTime(1990, 02, 28), PhoneNumber = "+38458623554", Email = "novak.djokovich@gmail.com", Gender = Gender.Man };
                 User DavidGofin = new User { FirstName = "David", FamilyName = "Gofin", TennisVlaanderenRanking = 10, DateOfBirth = new DateTime(1996, 07, 12), PhoneNumber = "+32499875214", Email = "david.gofin@tv.be", Gender = Gender.Man };
                 User AndyMurray = new User { FirstName = "Andy", FamilyName = "Murray", TennisVlaanderenRanking = 30, DateOfBirth = new DateTime(1988, 01, 12), PhoneNumber = "+32577896541", Email = "Andy@wimbledon.com", Gender = Gender.Man };
+                
 
                 User KimKlijsters = new User { FirstName = "Kim", FamilyName = "Klijsters", TennisVlaanderenRanking = 10, DateOfBirth = new DateTime(1985, 01, 02), PhoneNumber = "+32544785447", Email = "kim.klijsters@gmail.com", Gender = Gender.woman };
                 User MariaCharapova = new User { FirstName = "Maria", FamilyName = "Charapova", TennisVlaanderenRanking = 15, DateOfBirth = new DateTime(1993, 11, 09), PhoneNumber = "+32458745221", Email = "maria.charapova@gmail.com", Gender = Gender.woman };
@@ -159,10 +160,30 @@ namespace TournamentApi.Data
                 foreach (User u in tournamentWomen.Users)
                 {
                     await CreateUser(u.Email, "P@ssword1111");
-                } 
+                }
                 #endregion
 
 
+                User Web4User = new User { FirstName = "Web4", FamilyName = "IsMoreFunThenJava", TennisVlaanderenRanking = 30, DateOfBirth = new DateTime(2000, 01, 01), PhoneNumber = "+32577896541", Email = "web4@student.hogent.be", Gender = Gender.Man };
+                tournamentMen.AddUser(Web4User);
+                await CreateUser(Web4User.Email, "P@ssword1111");
+
+                Match w4Match1 = new Match(Web4User, NovakDjokovich);
+                Match w4Match2 = new Match(Web4User, RogerFederer);
+                Match w4Match3 = new Match(Web4User, DavidGofin);
+                Match w4Match4 = new Match(Web4User, RafaelNadal);
+                Match w4Match5 = new Match(Web4User, AndyMurray);
+                tournamentMen.AddMatch(w4Match1);
+                tournamentMen.AddMatch(w4Match2);
+                tournamentMen.AddMatch(w4Match3);
+                tournamentMen.AddMatch(w4Match4);
+                tournamentMen.AddMatch(w4Match5);
+
+                w4Match1.RegisterScore(6, 4, 4, 6, 0, 6);
+                w4Match2.RegisterScore(6, 4, 4, 6, 6, 0);
+                w4Match3.RegisterScore(2, 6, 6, 2, 7, 6);
+                w4Match4.RegisterScore(0, 6, 4, 6);
+                w4Match5.RegisterScore(2, 6, 6, 4, 7, 6);
 
 
                 _dbContext.SaveChanges();
