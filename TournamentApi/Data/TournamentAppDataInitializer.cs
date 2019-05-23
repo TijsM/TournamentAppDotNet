@@ -164,7 +164,7 @@ namespace TournamentApi.Data
                 #endregion
 
 
-                User Web4User = new User { FirstName = "Web4", FamilyName = "IsMoreFunThenJava", TennisVlaanderenRanking = 30, DateOfBirth = new DateTime(2000, 01, 01), PhoneNumber = "+32577896541", Email = "web4@student.hogent.be", Gender = Gender.Man };
+                User Web4User = new User { FirstName = "Web", FamilyName = "4", TennisVlaanderenRanking = 30, DateOfBirth = new DateTime(2000, 01, 01), PhoneNumber = "+32577896541", Email = "web4@student.hogent.be", Gender = Gender.Man };
                 tournamentMen.AddUser(Web4User);
                 await CreateUser(Web4User.Email, "P@ssword1111");
 

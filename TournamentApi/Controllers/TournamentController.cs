@@ -15,7 +15,7 @@ namespace TournamentApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[AllowAnonymous]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public class TournamentController : ControllerBase
     {
